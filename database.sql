@@ -13,7 +13,7 @@ create table client (
 
 create table agent (
     id int primary key,
-
+    -- algo sobre permissoões do agente?
     user_id int references user 
 );
 
