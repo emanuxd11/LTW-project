@@ -3,6 +3,7 @@ create table user (
     name varchar,
     username varchar,
     email varchar,
+    creation_date date,
     password varchar
 );
 
@@ -13,7 +14,6 @@ create table client (
 
 create table agent (
     id int primary key,
-    -- algo sobre permissoões do agente?
     user_id int references user 
 );
 
@@ -35,18 +35,54 @@ create table agent_department (
 );
 
 create table ticket (
-    id int,
+    id int primary key,
     department int references department,
     title varchar,
     description varchar,
-    -- image (?)
-    status boolean, -- boolean ou varchar?
-    agentID references agent,
-    primary key (id, department)
+    post_date date,
+    last_updated date,
+    img_reference varchar,
+    status boolean, 
+    agent_id references agent
+);
+
+create table ticket_version (
+    id int primary key,
+    title varchar,
+    description varchar,
+    version_date date,
+    ticket_id references ticket
 );
 
 create table replies (
+    id int primary key,
     text varchar,
-    ticketID int references ticket(id),
-    agentID int references agent
+    post_date date,
+    last_updated date,
+    ticket_id int references ticket,
+    agent_id int references agent
+);
+
+create table reply_version (
+    id int primary key,
+    text varchar,
+    version_date date,
+    reply_id references reply
+);
+
+create table hashtag (
+    content varchar primary key
+);
+
+-- junction table para a relação *---* de agent e department
+create table ticket_hashtag (
+    ticket_id references ticket,
+    hashtag_id references hashtag,
+    primary key (ticket_id, hashtag_id)
+);
+
+create table faq (
+    id int primary key,
+    title varchar,
+    description varchar
 );
