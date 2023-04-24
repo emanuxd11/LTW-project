@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Ticket Manager</title>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Ticket Manager</h1>
+        <h2>WebPage developed in the ambit of the Curricular Unit Languages and Technologies of the Web</h2>
+    </header>
+
+    <main>
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'Client')">Client</button>
+            <button class="tablinks" onclick="openTab(event, 'Agent')">Agent</button>
+            <button class="tablinks" onclick="openTab(event, 'Admin')">Admin</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="Client" class="tabsection" style="display: block">
+            <h3>Client</h3>
+            <p>A client can create tickets, each ticket has a department it belongs to</p>
+        </div>
+
+        <div id="Agent" class="tabsection" style="display: none">
+            <h3>Agent</h3>
+            <p>An agent can create, reply and alter tickets that belong to his department</p>
+        </div>
+
+        <div id="Admin" class="tabsection" style="display: none">
+            <h3>Tokyo</h3>
+            <p>An admin has full control over the tickets, being able to create, reply, delete and alter any tickets of any department</p>
+        </div>
+    </main>
+</body>
+</html>
