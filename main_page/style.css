@@ -1,0 +1,51 @@
+header {
+    text-align: left;
+    /*background-color: #FFE4CF; */
+    height: 200px;
+    /*padding: 5px 5px; */
+}
+
+#feup_logo { /*Define a posição do logo da FEUP*/
+    float: right;
+    width: 300px;
+    height: 125px;
+}
+
+header > #registry_section {
+    text-align: right;
+    position: absolute;
+    top: 120px;
+    right: 30px;
+}
+
+.tab {
+    overflow: hidden;
+    background-color: #FF9E52;
+}
+
+.tab button {
+    font-size: 16;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: #B85100;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tab button:hover {
+    background-color: #DB6100;
+}
+
+.tab button.active {
+    background-color: #FF7E18;
+}
+
+.tabsection {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #B85100;
+    border-top: none;
+    background-color: #FFE4CF;
+}
