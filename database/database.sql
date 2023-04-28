@@ -3,7 +3,7 @@ create table user (
     name varchar,
     username varchar,
     email varchar,
-    creation_date date,
+    creation_date text default datetime(),
     password varchar
 );
 

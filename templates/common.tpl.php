@@ -47,7 +47,7 @@
 <?php } ?>
 
 <?php function drawLoginForm() { ?>
-  <form action="../actions/action_login.php" method="post" class="login">
+  <form action="../actions/user_login.php" method="post" class="login">
     <input type="email" name="email" placeholder="email">
     <input type="password" name="password" placeholder="password">
     <a href="../pages/register.php">Register</a>
@@ -56,7 +56,7 @@
 <?php } ?>
 
 <?php function drawLogoutForm(Session $session) { ?>
-  <form action="../actions/action_logout.php" method="post" class="logout">
+  <form action="../actions/user_logout.php" method="post" class="logout">
     <a href="../pages/profile.php"><?=$session->getName()?></a>
     <button type="submit">Logout</button>
   </form>
