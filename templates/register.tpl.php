@@ -28,15 +28,15 @@
     <main>
 <?php } ?>
 
-
 <?php function drawRegisterForm() { ?>
     <section id="register">
       <h1>Register</h1>
-      <form>
+      <form action="../actions/user_register.php" method="post" class="register">
         <label> E-mail <input type="email" name="email"></label>
+        <label> Name <input type="text" name="name"></label>
         <label> Username <input type="text" name="username"></label>
         <label> Password <input type="password" name="password"></label>
-        <button formaction="#" formmethod="post">Register</button>
+        <button type="submit">Register</button>
       </form>
     </section>
 <?php } ?>

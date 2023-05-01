@@ -48,8 +48,8 @@
 
 <?php function drawLoginForm() { ?>
   <form action="../actions/user_login.php" method="post" class="login">
-    <input type="email" name="email" placeholder="email">
-    <input type="password" name="password" placeholder="password">
+    <input type="email" name="email" placeholder="Your Email">
+    <input type="password" name="password" placeholder="Password">
     <a href="../pages/register.php">Register</a>
     <button type="submit">Login</button>
   </form>

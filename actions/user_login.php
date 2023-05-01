@@ -9,14 +9,14 @@
 
   $db = getDatabaseConnection();
 
-  $user= User::getUserWithPassword($db, $_POST['email'], $_POST['password']);
+  $user = User::getUserWithPassword($db, $_POST['email'], $_POST['password']);
 
   if ($user) {
     $session->setId($user->id);
     $session->setName($user->name());
     $session->addMessage('success', 'Login successful!');
   } else {
-    $session->addMessage('error', 'Wrong password!');
+    $session->addMessage('error', 'The username or password did not match, please try again.');
   }
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);

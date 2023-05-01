@@ -25,22 +25,28 @@
       $stmt->execute(array($this->name, $this->id));
     }
     
-    static function registerUser(string $name, string $username, string $email, string $password) {
+    static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
       $stmt = $db->prepare('
-        INSERT INTO user (name, username, email, password) ( ?, ?, ?, ? )
+        INSERT INTO user (name, username, email, password) VALUES ( ?, ?, ?, ? )
       ');
       
-      $stmt->execute(array($name, $username, $email, password_hash($password)));
+      // $stmt->execute(array($name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
+
+      try {
+        $stmt->execute(array($name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
+      } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
     }
 
-    static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
+    /* static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
         SELECT id, name, username, email, creation_date
         FROM user 
         WHERE lower(email) = ? AND password = ?
       ');
 
-      $stmt->execute(array(strtolower($email), password_hash($password)));
+      $stmt->execute(array(strtolower($email), password_hash($password, PASSWORD_DEFAULT)));
   
       if ($user = $stmt->fetch()) {
         return new User (
@@ -51,6 +57,30 @@
           $user['creation_date']
         );
       } else return null;
+    } */
+
+    static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
+      $stmt = $db->prepare('
+        SELECT id, name, username, email, creation_date, password
+        FROM user 
+        WHERE lower(email) = ?
+      ');
+    
+      $stmt->execute(array(strtolower($email)));
+      
+      $user = $stmt->fetch();
+    
+      if ($user && password_verify($password, $user['password'])) {
+        return new User (
+          $user['id'],
+          $user['name'],
+          $user['username'],
+          $user['email'],
+          $user['creation_date']
+        );
+      } else {
+        return null;
+      }
     }
 
     static function getUser(PDO $db, int $id) : User {

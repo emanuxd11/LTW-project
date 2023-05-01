@@ -9,15 +9,21 @@
 
   $db = getDatabaseConnection();
 
-  $user= User::getUserWithPassword($db, $_POST['email'], $_POST['password']);
+  // ele regista
+  // não está ainda a dar login
+  // verificar antes de registar se o utilizador já existe
+  // pedir nome real e confirmação de pass
+  // redirecionar para o login após o registo
 
-  if ($user) {
+  User::registerUser($db, $_POST['username'], $_POST['name'], $_POST['email'], $_POST['password']);
+
+  /* if ($user) {
     $session->setId($user->id);
     $session->setName($user->name());
     $session->addMessage('success', 'Login successful!');
   } else {
     $session->addMessage('error', 'Wrong password!');
-  }
+  } */
 
   header('Location: ' . $_SERVER['HTTP_REFERER']);
 ?>
