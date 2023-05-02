@@ -25,6 +25,10 @@
       return isset($_SESSION['name']) ? $_SESSION['name'] : null;
     }
 
+    public function getUsername() : ?string {
+      return isset($_SESSION['username']) ? $_SESSION['username'] : null;
+    }
+
     public function setId(int $id) {
       $_SESSION['id'] = $id;
     }

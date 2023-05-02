@@ -8,8 +8,7 @@
     public string $email;
     public string $creation_date;
 
-    public function __construct(int $id, string $name, string $email, string $username)
-    {
+    public function __construct(int $id, string $name, string $email, string $username, string $creation_date) {
       $this->id = $id;
       $this->name= $name;
       $this->email = $email;
@@ -30,8 +29,6 @@
         INSERT INTO user (name, username, email, password) VALUES ( ?, ?, ?, ? )
       ');
       
-      // $stmt->execute(array($name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
-
       try {
         $stmt->execute(array($name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
       } catch (PDOException $e) {
@@ -39,27 +36,9 @@
       }
     }
 
-    /* static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
-      $stmt = $db->prepare('
-        SELECT id, name, username, email, creation_date
-        FROM user 
-        WHERE lower(email) = ? AND password = ?
-      ');
-
-      $stmt->execute(array(strtolower($email), password_hash($password, PASSWORD_DEFAULT)));
-  
-      if ($user = $stmt->fetch()) {
-        return new User (
-          $user['id'],
-          $user['name'],
-          $user['username'],
-          $user['email'],
-          $user['creation_date']
-        );
-      } else return null;
-    } */
-
     static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
+      error_log('password is: ' . $password, 3, "./error.log");
+
       $stmt = $db->prepare('
         SELECT id, name, username, email, creation_date, password
         FROM user 
@@ -68,7 +47,7 @@
     
       $stmt->execute(array(strtolower($email)));
       
-      $user = $stmt->fetch();
+      $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
       if ($user && password_verify($password, $user['password'])) {
         return new User (
