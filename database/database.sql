@@ -1,6 +1,10 @@
+.mode column
+.headers on
+
 create table user (
     id integer primary key autoincrement,
-    name varchar,
+    first_name varchar,
+    last_name varchar,
     username varchar,
     email varchar,
     creation_date TEXT DEFAULT (datetime('now', 'localtime')),

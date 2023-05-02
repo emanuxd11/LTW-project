@@ -9,13 +9,15 @@
 
   $db = getDatabaseConnection();
 
-  // ele regista
-  // não está ainda a dar login
   // verificar antes de registar se o utilizador já existe
   // pedir nome real e confirmação de pass
-  // redirecionar para o login após o registo
+  // redirecionar para o login após o register
 
-  User::registerUser($db, $_POST['username'], $_POST['name'], $_POST['email'], $_POST['password']);
+  $status = User::registerUser($db, $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);
+
+  if ($status !== true) { 
+    $session->addMessage('error', $status);
+  }
 
   /* if ($user) {
     $session->setId($user->id);

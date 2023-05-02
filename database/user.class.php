@@ -3,44 +3,67 @@
 
   class User {
     public int $id;
-    public string $name;
+    public string $first_name;
+    public string $last_name;
     public string $username;
     public string $email;
     public string $creation_date;
 
-    public function __construct(int $id, string $name, string $email, string $username, string $creation_date) {
+    public function __construct(int $id, string $first_name, string $last_name, string $email, string $username, string $creation_date) {
       $this->id = $id;
-      $this->name= $name;
+      $this->first_name= $first_name;
+      $this->last_name= $last_name;
       $this->email = $email;
       $this->creation_date = $creation_date;
     }
 
     function save($db) {
       $stmt = $db->prepare('
-        UPDATE user SET name = ?
+        UPDATE user SET username = ?
         WHERE id = ?
       ');
 
-      $stmt->execute(array($this->name, $this->id));
+      $stmt->execute(array($this->username, $this->id));
     }
     
-    static function registerUser(PDO $db, string $username, string $name, string $email, string $password) {
+    static function registerUser(PDO $db, string $username, string $first_name, string $last_name, string $email, string $password, string $password_confirmation) {
+      // check if email exists
       $stmt = $db->prepare('
-        INSERT INTO user (name, username, email, password) VALUES ( ?, ?, ?, ? )
+        SELECT id FROM user WHERE email = ?
+      ');
+      $stmt->execute(array($email));
+      $row = $stmt->fetch();
+      if ($row !== false) {
+        return "Email is already registered.";
+      }
+
+      // check of username exists
+      $stmt = $db->prepare('
+        SELECT id FROM user WHERE username = ?
+      ');
+      $stmt->execute(array($username));
+      $row = $stmt->fetch();
+      if ($row !== false) {
+        return "Username already exists.";
+      }
+
+      // check if passwords match
+      if ($password != $password_confirmation) {
+        return "Passwords don't match";
+      }
+      
+      $stmt = $db->prepare('
+        INSERT INTO user (first_name, last_name, username, email, password) VALUES ( ?, ?, ?, ?, ? )
       ');
       
-      try {
-        $stmt->execute(array($name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
-      } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-      }
+      $stmt->execute(array($first_name, $last_name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
+      
+      return true;
     }
 
     static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
-      error_log('password is: ' . $password, 3, "./error.log");
-
       $stmt = $db->prepare('
-        SELECT id, name, username, email, creation_date, password
+        SELECT id, first_name, last_name, username, email, creation_date, password
         FROM user 
         WHERE lower(email) = ?
       ');
@@ -52,7 +75,8 @@
       if ($user && password_verify($password, $user['password'])) {
         return new User (
           $user['id'],
-          $user['name'],
+          $user['first_name'],
+          $user['last_name'],
           $user['username'],
           $user['email'],
           $user['creation_date']
@@ -64,7 +88,7 @@
 
     static function getUser(PDO $db, int $id) : User {
       $stmt = $db->prepare('
-        SELECT id, name, username, email, creation_date
+        SELECT id, first_name, last_name, username, email, creation_date
         FROM user 
         WHERE id = ?
       ');
@@ -74,7 +98,8 @@
       
       return new User (
         $user['id'],
-        $user['name'],
+        $user['first_name'],
+        $user['last_name'],
         $user['username'],
         $user['email'],
         $user['creation_date']

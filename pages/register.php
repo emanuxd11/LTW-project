@@ -12,6 +12,6 @@
   $db = getDatabaseConnection();
 
   drawHeaderWithoutLogin($session);
-  drawRegisterForm();
+  drawRegisterForm($session);
   drawFooter();
 ?>

@@ -23,20 +23,31 @@
         // if ($session->isLoggedIn()) drawLogoutForm($session);
         // else drawLoginForm($session);
       ?>
-    </header> 
+    </header>
 
     <main>
 <?php } ?>
 
-<?php function drawRegisterForm() { ?>
+<?php function drawRegisterForm(Session $session) { ?>
     <section id="register">
       <h1>Register</h1>
       <form action="../actions/user_register.php" method="post" class="register">
         <label> E-mail <input type="email" name="email"></label>
-        <label> Name <input type="text" name="name"></label>
+        <label> First Name <input type="text" name="first_name"></label>
+        <label> Last Name <input type="text" name="last_name"></label>
         <label> Username <input type="text" name="username"></label>
         <label> Password <input type="password" name="password"></label>
+        <label> Confirm Password <input type="password" name="password_confirmation"></label>
         <button type="submit">Register</button>
       </form>
+
+    <section id="messages">
+      <?php foreach ($session->getMessages() as $messsage) { ?>
+        <article class="<?=$messsage['type']?>">
+          <?=$messsage['text']?>
+        </article>
+      <?php } ?>
+    </section>
+
     </section>
 <?php } ?>
