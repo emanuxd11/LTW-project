@@ -7,7 +7,7 @@ create table user (
     last_name varchar,
     username varchar,
     email varchar,
-    creation_date TEXT DEFAULT (datetime('now', 'localtime')),
+    creation_date varchar default (datetime('now', 'localtime')),
     password varchar
 );
 

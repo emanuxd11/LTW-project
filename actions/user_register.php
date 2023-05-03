@@ -9,23 +9,13 @@
 
   $db = getDatabaseConnection();
 
-  // verificar antes de registar se o utilizador já existe
-  // pedir nome real e confirmação de pass
-  // redirecionar para o login após o register
-
   $status = User::registerUser($db, $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);
 
   if ($status !== true) { 
     $session->addMessage('error', $status);
-  }
-
-  /* if ($user) {
-    $session->setId($user->id);
-    $session->setName($user->name());
-    $session->addMessage('success', 'Login successful!');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
   } else {
-    $session->addMessage('error', 'Wrong password!');
-  } */
-
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+    $session->addMessage('success', 'Registration successful! You can now log in.');
+    header('Location: ../pages/login.php');
+  }
 ?>

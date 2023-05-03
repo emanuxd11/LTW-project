@@ -26,29 +26,45 @@
       $stmt->execute(array($this->username, $this->id));
     }
     
-    static function registerUser(PDO $db, string $username, string $first_name, string $last_name, string $email, string $password, string $password_confirmation) {
-      // check if email exists
+    static function emailExists(PDO $db, string $email): bool {
       $stmt = $db->prepare('
         SELECT id FROM user WHERE email = ?
       ');
+      
       $stmt->execute(array($email));
       $row = $stmt->fetch();
-      if ($row !== false) {
+      
+      return $row != false;
+    }
+
+    static function usernameExists(PDO $db, string $username): bool {
+      $stmt = $db->prepare('
+        SELECT id FROM user WHERE username = ?
+      ');
+
+      $stmt->execute(array($username));
+      $row = $stmt->fetch();
+      
+      return $row != false;
+    }
+
+    static function passwordsMatch(string $password, string $password_confirmation): bool {
+      return $password == $password_confirmation;
+    }
+
+    static function registerUser(PDO $db, string $username, string $first_name, string $last_name, string $email, string $password, string $password_confirmation) {
+      // check if email exists
+      if (User::emailExists($db, $email)) {
         return "Email is already registered.";
       }
 
       // check of username exists
-      $stmt = $db->prepare('
-        SELECT id FROM user WHERE username = ?
-      ');
-      $stmt->execute(array($username));
-      $row = $stmt->fetch();
-      if ($row !== false) {
+      if (User::usernameExists($db, $username)) {
         return "Username already exists.";
       }
 
       // check if passwords match
-      if ($password != $password_confirmation) {
+      if (!User::passwordsMatch($password, $password_confirmation)) {
         return "Passwords don't match";
       }
       
