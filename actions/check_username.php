@@ -11,7 +11,6 @@
 
   $username = $_POST['username'];
 
-  // Check if the email is already registered
   if (User::usernameExists($db, $username)) {
     echo "taken";
   } else {
