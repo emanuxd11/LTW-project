@@ -7,14 +7,14 @@
   require_once(__DIR__ . '/../database/user.class.php');
   require_once(__DIR__ . '/../database/connection.db.php');
 
-  $db = getDatabaseConnection();
+  $password = $_POST['password'];
 
-  $email = $_POST['email'];
-
-  // Check if the email is already registered
-  if (User::emailExists($db, $email)) {
-    echo "registered";
+  // Check if the password meets the requirements
+  if (!User::passwordStrong($password)) {
+    echo "not_strong";
+  } else if(User::passwordTooLong($password)) {
+    echo "too_long";
   } else {
-    echo "available";
+    echo "strong";
   }
 ?>

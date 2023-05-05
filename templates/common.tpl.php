@@ -13,7 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../javascript/script.js" defer></script>
+    <script src="../js/script.js" defer></script>
   </head>
   <body>
 
@@ -21,7 +21,7 @@
       <h1><a href="/">No Name Tickets</a></h1>
       <?php 
         if ($session->isLoggedIn()) drawLogoutForm($session);
-        else drawLoginForm($session);
+        else drawLoginRegisterLink();
       ?>
     </header>
   
@@ -46,12 +46,10 @@
 </html>
 <?php } ?>
 
-<?php function drawLoginForm() { ?>
+<?php function drawLoginRegisterLink() { ?>
   <form action="../actions/user_login.php" method="post" class="login">
-    <input type="email" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Password" required>
+    <a href="../pages/login.php">Login</a>
     <a href="../pages/register.php">Register</a>
-    <button type="submit">Login</button>
   </form>
 <?php } ?>
 

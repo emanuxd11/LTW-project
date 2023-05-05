@@ -19,5 +19,5 @@
     $session->addMessage('error', 'The username or password did not match, please try again.');
   }
 
-  header('Location: ' . $_SERVER['HTTP_REFERER']);
+  header('Location: ../index.php');
 ?>

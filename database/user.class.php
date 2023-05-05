@@ -26,6 +26,30 @@
       $stmt->execute(array($this->username, $this->id));
     }
     
+    static function passwordStrong(string $password): bool {
+      if (strlen($password) < 8) {
+        return false;
+      }
+
+      if (!preg_match("#[0-9]+#", $password)) {
+        return false;
+      }
+
+      if (!preg_match("#[a-zA-Z]+#", $password)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    static function passwordTooLong(string $password): bool {
+      if (strlen($password) > 16) {
+        return true;
+      }
+
+      return false;
+    }
+
     static function emailExists(PDO $db, string $email): bool {
       $stmt = $db->prepare('
         SELECT id FROM user WHERE email = ?
@@ -58,9 +82,19 @@
         return "Email is already registered.";
       }
 
-      // check of username exists
+      // check if username exists
       if (User::usernameExists($db, $username)) {
         return "Username already exists.";
+      }
+
+      // check if password is strong enough
+      if (!User::passwordStrong($password)) {
+        return "Password must include at least one number, one letter and be at least 8 characters long.";
+      }
+
+      // check if password is too long
+      if (User::passwordTooLong($password)) {
+        return "Password cannot be longer than 16 characters.";
       }
 
       // check if passwords match

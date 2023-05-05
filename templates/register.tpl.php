@@ -26,27 +26,24 @@
 
 <?php function drawRegisterForm(Session $session) { ?>
     <section id="register">
-      <h1>Register</h1>
+      <h1>Sign Up</h1>
       <form action="../actions/user_register.php" method="post" class="register">
         <label> Email <input type="email" name="email" id="email" oninput="checkEmailExists()" required> </label>
         <span id="email_status"></span>
 
-        <!-- falta: 
-          verificar a força da pass durante o input;
-          bloquear o submit enquanto houver erros
-        -->
-
-        <label> First Name <input type="text" name="first_name"></label>
-        <label> Last Name <input type="text" name="last_name"></label>
+        <label> First Name (optional)<input type="text" name="first_name"></label>
+        <label> Last Name (optional)<input type="text" name="last_name"></label>
 
         <label> Username <input type="text" name="username" id="username" oninput="checkUsernameExists()" required> </label>
         <span id="username_status"></span>
 
-        <label> Password <input type="password" name="password" id="password" required></label>
+        <label> Password <input type="password" name="password" id="password" oninput="checkPasswordGood()" required></label>
+        <span id="strength_status"></span>
         <label> Confirm Password <input type="password" name="password_confirmation" id="password_confirmation" oninput="checkPasswordsMatch()" required></label>
         <span id="password_status"></span>
 
         <button type="submit">Register</button>
+        <p>Already have an account? <a href="login.php">Sign in</a></p>
       </form>
 
       <section id="messages">
