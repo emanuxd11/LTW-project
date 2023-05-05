@@ -31,9 +31,6 @@
         <label> Email <input type="email" name="email" id="email" oninput="checkEmailExists()" required> </label>
         <span id="email_status"></span>
 
-        <label> First Name (optional)<input type="text" name="first_name"></label>
-        <label> Last Name (optional)<input type="text" name="last_name"></label>
-
         <label> Username <input type="text" name="username" id="username" oninput="checkUsernameExists()" required> </label>
         <span id="username_status"></span>
 

@@ -3,10 +3,10 @@
 
 create table user (
     id integer primary key autoincrement,
-    first_name varchar,
-    last_name varchar,
-    username varchar,
-    email varchar,
+    first_name varchar default 'none',
+    last_name varchar default 'none',
+    username varchar unique,
+    email varchar unique,
     creation_date varchar default (datetime('now', 'localtime')),
     password varchar
 );

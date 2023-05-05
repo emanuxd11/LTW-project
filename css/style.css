@@ -1,26 +1,80 @@
-/* Global styles */
 html,
 body {
   height: 100%;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-family: Arial, sans-serif;
+  width: 85em;
 }
 
-/* Header styles */
 header {
-  background-color: white;
+  background-color: #f2f2f2;
   text-align: left;
-  padding: 0px;
+  padding: 10px;
+  justify-content: space-between;
+  align-items: center;
+
+  display: flex;
 }
 
-header h1 a {
+h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  order: 1;
+}
+
+.search-bar {
+  order: 2;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.search-bar input[type="text"] {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+
+.login-register {
+  order: 3;
+}
+
+.login-register a {
+  margin-left: 10px;
+  color: #333;
+  text-decoration: none;
+  border: 1px solid #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+
+/*  ************************************* */
+
+header h3 a {
   color: #333;
   text-decoration: none;
   font-size: 32px;
+  font-weight: bold;
 }
 
-/* Main styles */
 main {
   background-color: #7f0000;
   height: calc(100% - 130px);
@@ -31,7 +85,6 @@ main {
   flex-direction: column;
 }
 
-/* Register styles */
 #register {
   background-color: white;
   border-radius: 8px;
@@ -100,7 +153,6 @@ main {
   background-color: #b80000;
 }
 
-/* Messages styles */
 #messages {
   margin-top: 20px;
   display: grid;
@@ -132,7 +184,6 @@ main {
   }
 }
 
-/* Footer styles */
 footer {
   background-color: white;
   text-align: center;

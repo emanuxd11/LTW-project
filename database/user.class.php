@@ -9,10 +9,11 @@
     public string $email;
     public string $creation_date;
 
-    public function __construct(int $id, string $first_name, string $last_name, string $email, string $username, string $creation_date) {
+    public function __construct(int $id, string $first_name, string $last_name, string $username, string $email, string $creation_date) {
       $this->id = $id;
-      $this->first_name= $first_name;
-      $this->last_name= $last_name;
+      $this->first_name = $first_name;
+      $this->last_name = $last_name;
+      $this->username = $username;
       $this->email = $email;
       $this->creation_date = $creation_date;
     }
@@ -43,7 +44,7 @@
     }
 
     static function passwordTooLong(string $password): bool {
-      if (strlen($password) > 16) {
+      if (strlen($password) > 20) {
         return true;
       }
 
@@ -76,7 +77,7 @@
       return $password == $password_confirmation;
     }
 
-    static function registerUser(PDO $db, string $username, string $first_name, string $last_name, string $email, string $password, string $password_confirmation) {
+    static function registerUser(PDO $db, string $username, string $email, string $password, string $password_confirmation) {
       // check if email exists
       if (User::emailExists($db, $email)) {
         return "Email is already registered.";
@@ -94,7 +95,7 @@
 
       // check if password is too long
       if (User::passwordTooLong($password)) {
-        return "Password cannot be longer than 16 characters.";
+        return "Password cannot be longer than 20 characters.";
       }
 
       // check if passwords match
@@ -103,10 +104,10 @@
       }
       
       $stmt = $db->prepare('
-        INSERT INTO user (first_name, last_name, username, email, password) VALUES ( ?, ?, ?, ?, ? )
+        INSERT INTO user (username, email, password) VALUES ( ?, ?, ? )
       ');
       
-      $stmt->execute(array($first_name, $last_name, $username, $email, password_hash($password, PASSWORD_DEFAULT)));
+      $stmt->execute(array($username, $email, password_hash($password, PASSWORD_DEFAULT)));
       
       return true;
     }

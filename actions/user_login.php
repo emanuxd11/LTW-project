@@ -13,8 +13,8 @@
 
   if ($user) {
     $session->setId($user->id);
-    $session->setName($user->first_name, $user->last_name);
-    $session->addMessage('success', 'Login successful!');
+    $session->setUsername($user->username);
+    // $session->addMessage('success', 'Login successful!');
   } else {
     $session->addMessage('error', 'The username or password did not match, please try again.');
   }

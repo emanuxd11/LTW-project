@@ -9,7 +9,7 @@
 
   $db = getDatabaseConnection();
 
-  $status = User::registerUser($db, $_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);
+  $status = User::registerUser($db, $_POST['username'], $_POST['email'], $_POST['password'], $_POST['password_confirmation']);
 
   if ($status !== true) { 
     $session->addMessage('error', $status);

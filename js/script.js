@@ -54,7 +54,7 @@ function checkPasswordGood() {
           document.getElementById("password_status").innerHTML = "";
           return false;
         } else if (response == "too_long") {
-          document.getElementById("strength_status").innerHTML = "Password cannot be longer than 16 characters.";
+          document.getElementById("strength_status").innerHTML = "Password cannot be longer than 20 characters.";
           document.getElementById("password_status").innerHTML = "";
           return false;
         } else {

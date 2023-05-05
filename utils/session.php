@@ -21,12 +21,20 @@
       return isset($_SESSION['id']) ? $_SESSION['id'] : null;    
     }
 
+    public function getUsername() : ?string {
+      return isset($_SESSION['username']) ? $_SESSION['username'] : null;
+    }
+
     public function getName() : ?string {
       return isset($_SESSION['name']) ? $_SESSION['name'] : null;
     }
 
     public function setId(int $id) {
       $_SESSION['id'] = $id;
+    }
+
+    public function setUsername(string $username) {
+      $_SESSION['username'] = $username;
     }
 
     public function setName(string $first_name, string $last_name) {
