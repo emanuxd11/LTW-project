@@ -15,9 +15,9 @@
     $session->setId($user->id);
     $session->setUsername($user->username);
     // $session->addMessage('success', 'Login successful!');
+    header('Location: ../index.php');
   } else {
     $session->addMessage('error', 'The username or password did not match, please try again.');
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
   }
-
-  header('Location: ../index.php');
 ?>

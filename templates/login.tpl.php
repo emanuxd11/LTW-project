@@ -18,7 +18,7 @@
   <body>
 
     <header>
-      <h1><a href="/">No Name Tickets</a></h1>
+      <h3><a href="/">No Name Tickets</a></h3>
     </header>
 
     <main>
