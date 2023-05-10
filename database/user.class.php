@@ -26,6 +26,39 @@
 
       $stmt->execute(array($this->username, $this->id));
     }
+
+    public function isUserClient($db): bool {
+      $stmt = $db->prepare('
+        SELECT id FROM client WHERE user_id = ?
+      ');
+      
+      $stmt->execute(array($this->id));
+      $row = $stmt->fetch();
+
+      return $row !== false;
+    }
+
+    public function isUserAgent($db): bool {
+      $stmt = $db->prepare('
+        SELECT id FROM agent WHERE user_id = ?
+      ');
+      
+      $stmt->execute(array($this->id));
+      $row = $stmt->fetch();
+      
+      return $row !== false;
+    }
+
+    public function isUserAdmin($db): bool {
+      $stmt = $db->prepare('
+        SELECT id FROM admin WHERE user_id = ?
+      ');
+      
+      $stmt->execute(array($this->id));
+      $row = $stmt->fetch();
+      
+      return $row !== false;
+    }
     
     static function passwordStrong(string $password): bool {
       if (strlen($password) < 8) {
@@ -59,7 +92,7 @@
       $stmt->execute(array($email));
       $row = $stmt->fetch();
       
-      return $row != false;
+      return $row !== false;
     }
 
     static function usernameExists(PDO $db, string $username): bool {
@@ -70,7 +103,7 @@
       $stmt->execute(array($username));
       $row = $stmt->fetch();
       
-      return $row != false;
+      return $row !== false;
     }
 
     static function passwordsMatch(string $password, string $password_confirmation): bool {
@@ -103,12 +136,19 @@
         return "Passwords don't match";
       }
       
+      // insert user into user table
       $stmt = $db->prepare('
         INSERT INTO user (username, email, password) VALUES ( ?, ?, ? )
       ');
-      
       $stmt->execute(array($username, $email, password_hash($password, PASSWORD_DEFAULT)));
-      
+
+      // insert user into client table (default, this can be altered later by an admin)
+      $stmt = $db->prepare('
+        INSERT INTO client (user_id)
+        SELECT id FROM user WHERE username = ?
+      ');
+      $stmt->execute(array($username));
+
       return true;
     }
 
