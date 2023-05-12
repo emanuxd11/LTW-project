@@ -1,12 +1,13 @@
 <?php
     class Ticket {
         private $id;
+        private $department;
+        
         public $title;
         public $description;
         public $status;
         public $creation_date;
         public $closing_date;
-        private $department;
         public $client;
         public $agent;
 
