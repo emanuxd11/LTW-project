@@ -13,15 +13,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../javascript/script.js" defer></script>
+    <script src="../js/script.js" defer></script>
   </head>
-  <body>
 
+  <body>
     <header>
-      <h1><a href="/">No Name Tickets</a></h1>
+      <h3><a href="/">No Name Tickets</a></h3>
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <button>Search</button>
+      </div>
       <?php 
-        if ($session->isLoggedIn()) drawLogoutForm($session);
-        else drawLoginForm($session);
+        if ($session->isLoggedIn()) {
+          drawLogoutForm($session);
+        } else {
+          drawLoginRegisterLink();
+        }
       ?>
     </header>
   
@@ -36,6 +43,20 @@
     <main>
 <?php } ?>
 
+<?php function drawLoginRegisterLink() { ?>
+  <div class="login-register">
+    <a href="../pages/register.php" class="register-btn">Sign up</a>
+    <a href="../pages/login.php" class="login-btn">Log in</a>
+  </div>
+<?php } ?>
+
+<?php function drawLogoutForm(Session $session) { ?>
+  <form action="../actions/user_logout.php" method="post" class="logout">
+    <a href="../pages/profile.php"><?=$session->getUsername()?></a>
+    <button type="submit">Logout</button>
+  </form>
+<?php } ?>
+
 <?php function drawFooter() { ?>
     </main>
 
@@ -44,20 +65,4 @@
     </footer>
   </body>
 </html>
-<?php } ?>
-
-<?php function drawLoginForm() { ?>
-  <form action="../actions/action_login.php" method="post" class="login">
-    <input type="email" name="email" placeholder="email">
-    <input type="password" name="password" placeholder="password">
-    <a href="../pages/register.php">Register</a>
-    <button type="submit">Login</button>
-  </form>
-<?php } ?>
-
-<?php function drawLogoutForm(Session $session) { ?>
-  <form action="../actions/action_logout.php" method="post" class="logout">
-    <a href="../pages/profile.php"><?=$session->getName()?></a>
-    <button type="submit">Logout</button>
-  </form>
 <?php } ?>
