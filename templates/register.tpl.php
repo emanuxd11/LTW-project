@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/login-register.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../js/script.js" defer></script>
   </head>
@@ -25,7 +26,7 @@
 <?php } ?>
 
 <?php function drawRegisterForm(Session $session) { ?>
-    <section id="register">
+    <section id="login-register">
       <h1>Sign Up</h1>
       <form action="../actions/user_register.php" method="post" class="register">
         <label> Email <input type="email" name="email" id="email" oninput="checkEmailExists()" required> </label>
