@@ -14,3 +14,7 @@ function openTab(event, AgentType) {
     document.getElementById(AgentType).style.display = "block";
     event.currentTarget.className += " active";
 }
+
+function redirectTicket(id) {
+    console.log(id);
+}

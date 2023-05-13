@@ -21,6 +21,8 @@ header > #registry_section {
 .tab {
     overflow: hidden;
     background-color: #FF9E52;
+    border-top-left-radius: 4px; /*Arredonda os cantos*/
+    border-top-right-radius: 4px; 
 }
 
 .tab button {
@@ -35,11 +37,11 @@ header > #registry_section {
 }
 
 .tab button:hover {
-    background-color: #DB6100;
+    background-color: #FF7E18;
 }
 
 .tab button.active {
-    background-color: #FF7E18;
+    background-color: #DB6100;
 }
 
 .tabsection {
@@ -48,4 +50,45 @@ header > #registry_section {
     border: 1px solid #B85100;
     border-top: none;
     background-color: #FFE4CF;
+}
+
+main #searchOptions {  
+    padding: 10px;
+    text-align: left;
+}
+
+#ticketSearchBar {
+    border-radius: 4px;
+    float: right;
+}
+
+#searchButton {
+    border-radius: 4px;
+    float: right;
+}
+
+.ticket {
+    border: 1px solid #B85100;
+    border-radius: 6px;
+    padding-top: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+    margin: 10px;
+    background-color: #FFFFFF;
+    text-align: left;
+}
+
+.ticket h1 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ticket h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ticket h3 {
+    font-size: 14px;
 }
