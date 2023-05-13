@@ -11,5 +11,8 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
+  if ($session->isLoggedIn()) {
+    drawTicketFormLink();
+  }
   drawFooter();
 ?>

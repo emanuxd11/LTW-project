@@ -9,33 +9,29 @@
     <h1>Create a Ticket</h1>
     <form action="../actions/submit_ticket.php" method="post">
       <label for="title">Title:</label>
-      <input type="text" id="title" name="title">
+      <input type="text" id="title" name="title" onblur="checkValidTitle()">
+      <span id="title_status"></span>
 
       <label for="description">Description:</label>
-      <textarea id="description" name="description"></textarea>
-
-      <label for="hashtags">Hashtags:</label>
-      <input type="text" id="hashtags" name="hashtags" list="hashtag-list" multiple>
-      <datalist id="hashtag-list">
-        <option value="#sales">
-        <option value="#marketing">
-        <option value="#accounting">
-        <option value="#IT">
-      </datalist>
+      <textarea id="description" name="description" onblur="checkValidDescription()"></textarea>
+      <span id="description_status"></span>
 
       <label for="department">Department:</label>
       <select id="department" name="department">
-        <option value="" selected disabled>Select Department</option>
+        <option value="" selected disabled>Select Department (optional)</option>
         <?php
           $departments = array("Accounting", "Sales", "Marketing", "IT");
 
-          for ($i = 0; $i < count($departments); $i++) {
-            echo "<option value='" . ($i+1) . "'>" . $departments[$i] . "</option>";
+          foreach ($departments as $department) {
+            echo "<option value='" . $department . "'>" . $department . "</option>";
           }
         ?>
       </select>
 
-      <input type="submit" value="Submit Ticket">
+      <label for="hashtags">Hashtags (não funciona, fazer isto mais tarde porque é complexo):</label>
+      <input type="text" id="hashtags" name="hashtags">
+
+      <input type="submit" id="submit-button" value="Submit Ticket" disabled>
     </form>
   </section>
 <?php } ?>

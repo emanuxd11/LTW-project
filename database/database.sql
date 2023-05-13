@@ -3,12 +3,12 @@
 
 create table user (
     id integer primary key autoincrement,
-    first_name varchar default 'none',
-    last_name varchar default 'none',
-    username varchar unique,
-    email varchar unique,
-    creation_date varchar default (datetime('now', 'localtime')),
-    password varchar
+    first_name text default 'none',
+    last_name text default 'none',
+    username text unique,
+    email text unique,
+    creation_date text default (datetime('now', 'localtime')),
+    password text
 );
 
 create table client (
@@ -28,7 +28,7 @@ create table admin (
 
 create table department (
     id integer primary key autoincrement,
-    name varchar
+    name text
 );
 
 -- tabela de associação para a relação *---* de agent e department
@@ -41,41 +41,43 @@ create table agent_department (
 create table ticket (
     id integer primary key autoincrement,
     department integer references department,
-    title varchar,
-    description varchar,
-    post_date date,
-    last_updated date,
-    img_reference varchar,
-    status boolean, 
+    original_poster integer references user,
+    title text,
+    description text,
+    post_date text default (datetime('now', 'localtime')),
+    last_updated text default (datetime('now', 'localtime')),
+    closing_date text default null,
+    img_reference text,
+    status text default 'open',
     agent_id references agent
 );
 
 create table ticket_version (
     id integer primary key autoincrement,
-    title varchar,
-    description varchar,
-    version_date date,
+    title text,
+    description text,
+    version_date text,
     ticket_id references ticket
 );
 
 create table replies (
     id integer primary key autoincrement,
-    text varchar,
-    post_date date,
-    last_updated date,
+    text text,
+    post_date text default (datetime('now', 'localtime')),
+    last_updated text,
     ticket_id integer references ticket,
     agent_id integer references agent
 );
 
 create table reply_version (
     id integer primary key autoincrement,
-    text varchar,
-    version_date date,
+    text text,
+    version_date text,
     reply_id references reply
 );
 
 create table hashtag (
-    content varchar primary key
+    content text primary key
 );
 
 -- junction table para a relação *---* de agent e department
@@ -87,6 +89,6 @@ create table ticket_hashtag (
 
 create table faq (
     id integer primary key autoincrement,
-    title varchar,
-    description varchar
+    title text,
+    description text
 );
