@@ -1,5 +1,5 @@
 <?php
-    require("tickets.class.php");
+    require($_SERVER['DOCUMENT_ROOT'] . '/database/tickets.class.php');
 
     function DisplayTickets($ticket_array) {
         /*$department = $_GET["departmentChoice"];

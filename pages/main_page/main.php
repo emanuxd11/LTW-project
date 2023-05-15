@@ -1,3 +1,6 @@
+<?php 
+    require($_SERVER['DOCUMENT_ROOT'] . '/pages/main_page/utils/ticketDisplayer.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,8 +61,6 @@
             </div>
             
             <?php 
-                require("ticketDisplayer.php");
-
                 $Ticket1 = new Ticket(1, "Test Title 1", "Test Description 1", "Test Department 1", "Test Client 1");
                 $Ticket2 = new Ticket(2, "Test Title 2", "Test Description 2", "Marketing", "Test Client 2");
                 $Ticket3 = new Ticket(3, "Test Title 3", "Test Description 3", "Test Department 3", "Test Client 3");

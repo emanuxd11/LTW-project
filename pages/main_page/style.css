@@ -79,6 +79,11 @@ main #searchOptions {
     text-align: left;
 }
 
+.ticket:hover {
+    background-color: #FFE4CF;
+    cursor: pointer;
+}
+
 .ticket h1 {
     font-size: 20px;
     font-weight: bold;
