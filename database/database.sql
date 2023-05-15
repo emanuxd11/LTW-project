@@ -46,9 +46,8 @@ create table ticket (
     description text,
     post_date text default (datetime('now', 'localtime')),
     last_updated text default (datetime('now', 'localtime')),
-    closing_date text default null,
+    closing_date text,
     img_reference text,
-    status text default 'open',
     agent_id references agent
 );
 
