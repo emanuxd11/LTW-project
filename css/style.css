@@ -68,11 +68,25 @@ h3 {
   order: 3;
 }
 
+header a {
+  color: #0074CC;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header a:hover {
+  color: #4ca2ff;
+}
+
 header h3 a {
   color: #333;
   text-decoration: none;
   font-size: 32px;
   font-weight: bold;
+}
+
+header h3 a:hover {
+  color: #333;
 }
 
 main {
@@ -129,15 +143,71 @@ footer {
 
 #ticket-form-link {
   display: inline-block;
-  padding: 8px 16px;
+  margin-top: 10px;
+  padding: 12px 20px 12px 20px;
   background-color: #2d3e50;
   color: #fff;
   border-radius: 4px;
   text-decoration: none;
+  text-align: center;
   transition: background-color 0.3s ease;
+  width: 50%;
 }
 
 #ticket-form-link:hover {
   background-color: #34495e;
 }
 
+.recent-tickets {
+  background-color: white;;
+  border-radius: 4px;
+  padding: 20px;
+  width: 50%;
+  height: 80%;
+  overflow: auto;
+}
+
+.recent-tickets ul {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.recent-tickets h2 {
+  font-size: 24px;
+  margin: 20px;
+  text-align: center;
+}
+
+.ticket-list li {
+  list-style-type: none;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.ticket-list li h4 {
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+}
+
+.ticket-list a {
+  color: #0074CC;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ticket-list a:hover {
+  color: #4ca2ff;
+}
+
+.ticket-list li p {
+  color: #666;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.ticket-list li .ticket-date {
+  color: #999;
+  font-size: 12px;
+}

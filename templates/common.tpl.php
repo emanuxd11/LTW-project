@@ -52,8 +52,14 @@
     <main>
 <?php } ?>
 
-<?php function drawTicketFormLink() { ?>
-  <a href="../pages/ticket_form.php" id="ticket-form-link">Create a New Ticket (make this look ok later, now mainly for testing)</a>
+<?php function drawTicketFormLink(Session $session) { ?>
+  <?php
+    if ($session->isLoggedIn()) {
+      echo "<a href=\"../pages/ticket_form.php\" id=\"ticket-form-link\">Having issues? Click here to create a new ticket!</a>";
+    } else {
+      echo "<a href=\"../pages/login.php\" id=\"ticket-form-link\">Having issues? Sign in to create a new ticket!</a>";
+    }
+  ?>
 <?php } ?>
 
 <?php function drawLoginRegisterLink() { ?>
