@@ -32,7 +32,7 @@
         }
 
         function setDepartment($aDepartment) {
-            if($aDepartment != "Marketing" && $aDepartment != "Engineering") { //Once we define more departments, they should be added here
+            if($aDepartment != "Marketing" && $aDepartment != "Support" && $aDepartment != "Sales") { //Once we define more departments, they should be added here
                 $this->department = "No Department";
             }
             else {
