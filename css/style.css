@@ -1,10 +1,17 @@
 html,
 body {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+
   margin: 0 auto;
   padding: 0;
   font-family: Arial, sans-serif;
   width: 85em;
+}
+
+body {
+  min-height: 100vh;
 }
 
 header {
@@ -61,6 +68,16 @@ h3 {
   order: 3;
 }
 
+header a {
+  color: #0074CC;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header a:hover {
+  color: #4ca2ff;
+}
+
 header h3 a {
   color: #333;
   text-decoration: none;
@@ -68,9 +85,15 @@ header h3 a {
   font-weight: bold;
 }
 
+header h3 a:hover {
+  color: #333;
+}
+
 main {
+  flex: 1;
+
   background-color: #7f0000;
-  height: calc(100% - 130px);
+  /* height: calc(100% - 130px); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,4 +139,75 @@ footer {
   color: #666;
   font-size: 16px;
   border-top: 1px solid #ccc;
+}
+
+#ticket-form-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 20px 12px 20px;
+  background-color: #2d3e50;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 50%;
+}
+
+#ticket-form-link:hover {
+  background-color: #34495e;
+}
+
+.recent-tickets {
+  background-color: white;;
+  border-radius: 4px;
+  padding: 20px;
+  width: 50%;
+  height: 80%;
+  overflow: auto;
+}
+
+.recent-tickets ul {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.recent-tickets h2 {
+  font-size: 24px;
+  margin: 20px;
+  text-align: center;
+}
+
+.ticket-list li {
+  list-style-type: none;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.ticket-list li h4 {
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+}
+
+.ticket-list a {
+  color: #0074CC;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.ticket-list a:hover {
+  color: #4ca2ff;
+}
+
+.ticket-list li p {
+  color: #666;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.ticket-list li .ticket-date {
+  color: #999;
+  font-size: 12px;
 }

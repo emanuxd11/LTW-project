@@ -1,0 +1,86 @@
+#ticket {
+  width: 70%;
+  /* min-height: 50%;
+  max-height: auto; */
+  margin: 20px auto;
+  padding: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  height: 100%;
+  white-space: pre-line;
+}
+
+#ticket h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#ticket p {
+  font-size: 16px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+#ticket p#description {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+} 
+
+#ticket a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#ticket a:hover {
+  text-decoration: underline;
+}
+
+#ticket .timestamp {
+  color: #777;
+  font-size: 14px;
+}
+
+#ticket .department {
+  color: #777;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  #ticket {
+    padding: 10px;
+  }
+}
+
+.admin-view {
+  width: 40%;
+  height: 300px;
+
+  padding: 20px;
+
+  background-color: rgb(207, 207, 207);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.admin-view h4 {
+  vertical-align: top;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.admin-view p {
+  line-height: normal;
+  margin: 5px 0;
+}
+
+.admin-view a {
+  color: #333;
+}

@@ -11,10 +11,17 @@
     <title>No Name Tickets</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- css -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ticket_form.css">
+    <link rel="stylesheet" href="../css/ticket_page.css">
+    <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="../js/script.js" defer></script>
+    
+    <!-- js -->
+    <script src="../js/ajax.js" defer></script>
+    <script src="../js/form_validation.js" defer></script>
   </head>
 
   <body>
@@ -39,9 +46,20 @@
           <?=$messsage['text']?>
         </article>
       <?php } ?>
+      
     </section>
 
     <main>
+<?php } ?>
+
+<?php function drawTicketFormLink(Session $session) { ?>
+  <?php
+    if ($session->isLoggedIn()) {
+      echo "<a href=\"../pages/ticket_form.php\" id=\"ticket-form-link\">Having issues? Click here to create a new ticket!</a>";
+    } else {
+      echo "<a href=\"../pages/login.php\" id=\"ticket-form-link\">Having issues? Sign in to create a new ticket!</a>";
+    }
+  ?>
 <?php } ?>
 
 <?php function drawLoginRegisterLink() { ?>
