@@ -20,6 +20,14 @@
   $ticket = Ticket::getTicketByID($db, $ticket_id);
 
   drawHeader($session);
-  drawTicket($ticket, User::getUser($db, $ticket->client_id));
+
+  if ($session->isSessionAgent($db)) {
+    drawTicketAgentView($ticket, User::getUser($db, $ticket->client_id));
+  } else if ($session->isSessionAdmin($db)) {
+    drawTicketAdminView($ticket, User::getUser($db, $ticket->client_id));
+  } else {
+    drawTicketClientView($ticket, User::getUser($db, $ticket->client_id));
+  }
+
   drawFooter();
 ?>

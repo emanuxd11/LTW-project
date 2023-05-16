@@ -10,7 +10,7 @@
   require_once(__DIR__ . '/../database/connection.db.php');
 ?>
 
-<?php function drawTicket(Ticket $ticket, User $user) { ?>
+<?php function drawTicketStandard(Ticket $ticket, User $user) { ?>
   <section id="ticket">
     <?php
       echo "<h1>$ticket->title</h1>";
@@ -21,8 +21,41 @@
       // acrescentar hashtags mais tarde
       $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
       $datetime = $datetime->format('M d Y \a\t H:i');
-      echo "<p>Posted by <a href=\"../profile.php?id=$user->id\">$user->username</a> on $datetime.<p>";
+      echo "<p>Posted by <a href=\"../profile.php?id=$user->id\">$user->username</a> on $datetime<p>";
     ?>
+<?php } ?>
+
+<?php function drawTicketAdminView(Ticket $ticket, User $user) { ?>
+    <?php
+      drawTicketStandard($ticket, $user);
+      
+      if (!$ticket->isAssigned()) {
+        echo "<p>Agent: <a href=\"#\">agent_name</a></p>";
+        echo "<p>Status: " . ($ticket->isClosed() ? "closed" : "open");
+      } else {
+        echo "<p>Agent: N/A</p>";
+      }
+      // complete with more stuff
+    ?>
+  </section>
+<?php } ?>
+
+<?php function drawTicketAgentView(Ticket $ticket, User $user) { ?>
+  <?php
+    drawTicketStandard($ticket, $user);
+  
+    if ($ticket->isAssigned()) {
+      echo "<p>Agent: <a href=\"#\">agent_name</a></p>";
+    } else {
+      echo "<p>Agent: N/A</p>";
+    }
+    // complete with more stuff
+  ?>
+  </section>
+<?php } ?>
+
+<?php function drawTicketClientView(Ticket $ticket, User $user) { ?>
+  <?php drawTicketStandard($ticket, $user); ?>
   </section>
 <?php } ?>
 

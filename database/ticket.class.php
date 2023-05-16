@@ -36,12 +36,16 @@
         }
 
         function isClosed() : bool {
-            return $this->closing_date !== null;
+            return $this->closing_date !== "";
         }
 
-        function markClosed() {
+        function markClosed(PDO $db) {
             // status is derived from closing date
             // assign closing date in the db
+        }
+
+        function isAssigned() : bool {
+            return $this->agent_id !== -1;
         }
 
         static function submitTicket(PDO $db, $department, $title, $description, $client_id) {
