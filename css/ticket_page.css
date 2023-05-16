@@ -22,7 +22,8 @@
 
 #ticket p {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 #ticket p#description {
@@ -56,4 +57,30 @@
   #ticket {
     padding: 10px;
   }
+}
+
+.admin-view {
+  width: 40%;
+  height: 300px;
+
+  padding: 20px;
+
+  background-color: rgb(207, 207, 207);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.admin-view h4 {
+  vertical-align: top;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.admin-view p {
+  line-height: normal;
+  margin: 5px 0;
+}
+
+.admin-view a {
+  color: #333;
 }

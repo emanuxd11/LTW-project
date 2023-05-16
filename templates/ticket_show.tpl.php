@@ -12,31 +12,29 @@
 
 <?php function drawTicketStandard(Ticket $ticket, User $user) { ?>
   <section id="ticket">
+    <h1><?= $ticket->title ?></h1>
+    <p id="description"><?= $ticket->description ?></p>
+    <?php if ($ticket->department != null): ?>
+     <p>Department: <?= $ticket->department ?></p>
+    <?php endif; ?>
     <?php
-      echo "<h1>$ticket->title</h1>";
-      echo "<p id=\"description\">$ticket->description</p>";
-      if ($ticket->department != null) {
-        echo "<p>Department: $ticket->department</p>";
-      }
-      // acrescentar hashtags mais tarde
-      $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
-      $datetime = $datetime->format('M d Y \a\t H:i');
-      echo "<p>Posted by <a href=\"../profile.php?id=$user->id\">$user->username</a> on $datetime<p>";
+    $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
+    $formattedDatetime = $datetime->format('M d Y \a\t H:i');
     ?>
+    <p>Posted by <a href="../profile.php?id=<?= $user->id ?>"><?= $user->username ?></a> on <?= $formattedDatetime ?></p>
 <?php } ?>
 
-<?php function drawTicketAdminView(Ticket $ticket, User $user) { ?>
-    <?php
-      drawTicketStandard($ticket, $user);
-      
-      if (!$ticket->isAssigned()) {
-        echo "<p>Agent: <a href=\"#\">agent_name</a></p>";
-        echo "<p>Status: " . ($ticket->isClosed() ? "closed" : "open");
-      } else {
-        echo "<p>Agent: N/A</p>";
-      }
-      // complete with more stuff
-    ?>
+<?php function drawTicketAdminView(Ticket $ticket, User $user) {
+  drawTicketStandard($ticket, $user); ?>
+  <div class="admin-view">
+    <h4>Admin View</h4>
+    <?php if (!$ticket->isAssigned()): ?>
+    <p>Agent: <a href="#"><?php echo "agent_name"; ?></a></p>
+    <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
+    <?php else: ?>
+    <p>Agent: N/A</p>
+    <?php endif; ?>
+  </div>
   </section>
 <?php } ?>
 
@@ -45,9 +43,9 @@
     drawTicketStandard($ticket, $user);
   
     if ($ticket->isAssigned()) {
-      echo "<p>Agent: <a href=\"#\">agent_name</a></p>";
+      echo "<p>Agent: <a href=\"#\">agent_name</a></p>" . "\n";
     } else {
-      echo "<p>Agent: N/A</p>";
+      echo "<p>Agent: N/A</p>" . "\n";
     }
     // complete with more stuff
   ?>
@@ -67,16 +65,16 @@
         $id_array = array_slice(array_reverse(Ticket::getAllTicketIds($db)), 0, 5);
         foreach($id_array as &$id) {
           $ticket = Ticket::getTicketById($db, $id);
-          echo "<li>";
-          echo "<h4><a href=\"../pages/ticket.php?id=$ticket->id\">$ticket->title</a></h4>";
+          echo "<li>" . "\n";
+          echo "<h4><a href=\"../pages/ticket.php?id=$ticket->id\">$ticket->title</a></h4>" . "\n";
 
           $description = substr($ticket->description, 0, 50) . "...";
-          echo "<p>$description</p>";
+          echo "<p>$description</p>" . "\n";
           
           $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
           $datetime = $datetime->format('M d Y \a\t H:i');
           $user = User::getUser($db, $ticket->client_id);
-          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/profile.php?id=$user->id\">$user->username</a> on $datetime</span>";
+          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/profile.php?id=$user->id\">$user->username</a> on $datetime</span>" . "\n";
           // acrescentar hashtags aqui nalgum lado mais tarde
         }
       ?>
