@@ -1,5 +1,6 @@
 <?php 
     require($_SERVER['DOCUMENT_ROOT'] . '/pages/main_page/utils/ticketDisplayer.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/database/loadTickets.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,17 +42,15 @@
             <div id="searchOptions">
                 <form action="main.php" method="get">
                     <label for="department" >Department: </label> <select id="departmentSelect" name="departmentChoice">
-                        <option value="Test1">Test 1</option>
-                        <option value="Test2">Test 2</option>
-                        <option value="Test3">Test 3</option>
-                        <option value="Test4">Test 4</option>
+                        <option value="all">All Departments</option>
+                        <option value="Support">Support</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Marketing">Marketing</option>
                     </select>
 
                     <label for="sortOrder">&nbsp Sort by: </label> <select id="sortOrder" name="sortOrder">
-                        <option value="Test1">Test 1</option>
-                        <option value="Test2">Test 2</option>
-                        <option value="Test3">Test 3</option>
-                        <option value="Test4">Test 4</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
                     </select>
                     
                     <input type="submit" value="Search" id="searchButton">
@@ -61,13 +60,7 @@
             </div>
             
             <?php 
-                $Ticket1 = new Ticket(1, "Test Title 1", "Test Description 1", "Test Department 1", "Test Client 1");
-                $Ticket2 = new Ticket(2, "Test Title 2", "Test Description 2", "Marketing", "Test Client 2");
-                $Ticket3 = new Ticket(3, "Test Title 3", "Test Description 3", "Test Department 3", "Test Client 3");
-                $Ticket4 = new Ticket(4, "Test Title 4", "Test Description 4", "Engineering", "Test Client 4");
-                $Ticket5 = new Ticket(5, "Test Title 5", "Test Description 5", "Test Department 5", "Test Client 5");
-
-                $ticket_array = array($Ticket1, $Ticket2, $Ticket3, $Ticket4, $Ticket5);
+                $ticket_array = loadTickets(false);
                 DisplayTickets($ticket_array);
             ?>
         </div>

@@ -1,11 +1,8 @@
 <?php
+    declare(strict_types = 1);
     require($_SERVER['DOCUMENT_ROOT'] . '/database/tickets.class.php');
 
     function DisplayTickets($ticket_array) {
-        /*$department = $_GET["departmentChoice"];
-        $sortOrder = $_GET["sortOrder"];
-        $searchBar = $_GET["ticketSearchBar"];
-        */
         $ticket_class = "ticket";
         $ticket_id_initial = "ticket_";
         
