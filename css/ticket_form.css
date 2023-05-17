@@ -40,10 +40,12 @@ form textarea {
   margin-bottom: 0px;
   box-sizing: border-box;
   grid-column: 1 / -1;
+  font-family: Arial, sans-serif;
 }
 
 form textarea {
   height: 150px;
+  resize: vertical;
 }
 
 form input[type="text"]::placeholder,
@@ -76,5 +78,15 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-  background-color: #34b338;
+  background-color: #388E3C;
+}
+
+#submit-button:disabled {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'");
+  background-position: center;
+  cursor: not-allowed;
+}
+
+#submit-button:hover:disabled {
+  background-color: #81C784;
 }
