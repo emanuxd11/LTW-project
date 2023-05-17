@@ -102,3 +102,25 @@ function checkPasswordsMatch() {
     password_status.style.color = SUCCESS_COLOR;
   }
 }
+
+// functions for dynamic search
+
+
+function agentSearchTest() {
+  const search_input = document.getElementById("agent-search");
+  const agent_list = document.getElementById("agent-list");
+  const agents = ["agent_002", "agent_001", "agent_007"]; // Replace with your list of agents
+  
+  const search_query = search_input.value.toLowerCase();
+  const filtered_agents = agents.filter(agent => agent.toLowerCase().includes(search_query));
+  
+  // Clear the existing list
+  agent_list.innerHTML = "";
+  
+  // Add filtered agents to the list
+  filtered_agents.forEach(agent => {
+    const li = document.createElement("li");
+    li.textContent = agent;
+    agent_list.appendChild(li);
+  });
+}

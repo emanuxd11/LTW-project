@@ -28,11 +28,13 @@
   drawTicketStandard($ticket, $user); ?>
   <div class="admin-view">
     <h4>Admin View</h4>
-    <?php if (!$ticket->isAssigned()): ?>
-    <p>Agent: <a href="#"><?php echo "agent_name"; ?></a></p>
-    <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
+    <?php if ($ticket->isAssigned()): ?>
+      <p>Agent: <a href="#"><?php echo "agent_name"; ?></a></p>
+      <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
     <?php else: ?>
-    <p>Agent: N/A</p>
+      <p>Agent: N/A</p>
+      <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearchTest()">
+      <ul id="agent-list"></ul>
     <?php endif; ?>
   </div>
   </section>

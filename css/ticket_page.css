@@ -84,3 +84,17 @@
 .admin-view a {
   color: #333;
 }
+
+.admin-view ul#agent-list {
+  /* border: 1px solid black; */
+  max-height: 150px;
+  overflow: auto;
+}
+
+/* #agent-search:focus + #agent-list {
+  display: block;
+}
+
+#agent-search + #agent-list {
+  display: none;
+} */

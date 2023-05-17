@@ -1,6 +1,6 @@
 <?php
     declare(strict_types = 1);
-    require($_SERVER['DOCUMENT_ROOT'] . '/database/tickets.class.php');
+    require($_SERVER['DOCUMENT_ROOT'] . '/database/ticket.class.php');
 
     function DisplayTickets($ticket_array) {
         $ticket_class = "ticket";
