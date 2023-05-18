@@ -34,28 +34,47 @@
         $agent_username = User::getUser($db, $agent_user_id)->username;
       ?>
       <p>Agent: <a href="<?php echo "../pages/profile.php?id=$agent_user_id"; ?>"><?php echo $agent_username; ?></a></p>
-      <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
-    <?php else: ?>
+      <form id="unassign" action="../actions/unassign_agent.php" method="post">
+        <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
+        <input type="submit" value="Unassign">
+      </form>
+    <?php elseif (!$ticket->isClosed()): ?>
       <label>Assign an agent here <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearch('<?php echo $ticket->department; ?>', <?php echo $ticket->id?>)"></label>
       <ul id="agent-list"></ul>
+    <?php endif; ?>
+    <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
+    <?php if (!$ticket->isClosed()): ?>
+      <form id="mark-closed" action="../actions/close_ticket.php" method="post">
+        <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
+        <input type="submit" value="Mark as closed">
+      </form>
     <?php endif; ?>
   </div>
   </section>
 <?php } ?>
 
-<?php function drawTicketAgentView(Ticket $ticket, User $user) { ?>
-  <?php
-    drawTicketStandard($ticket, $user);
-  
-    if ($ticket->isAssigned()) {
-      $agent_user_id = $ticket->getAgentUserId($db);
-      $agent_username = User::getUserById($db, $agent_user_id)->username;
-      echo "<p>Agent: <a href=\"../pages/profile.php?id=$agent_user_id\">$agent_username</a></p>" . "\n";
-    } else {
-      echo "<p>Agent: N/A</p>" . "\n";
-    }
-    // complete with more stuff
-  ?>
+<?php function drawTicketAgentView(Ticket $ticket, User $user) {
+  drawTicketStandard($ticket, $user); ?>
+  <div class="admin-view">
+    <h4>Agent View</h4>
+    <?php if ($ticket->isAssigned()):
+        $db = getDatabaseConnection();
+        $agent_user_id = $ticket->getAgentUserId($db);
+        $agent_username = User::getUser($db, $agent_user_id)->username;
+      ?>
+      <p>Agent: <a href="<?php echo "../pages/profile.php?id=$agent_user_id"; ?>"><?php echo $agent_username; ?></a></p>
+    <?php elseif (!$ticket->isClosed()): ?>
+      <label>Assign an agent here <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearch('<?php echo $ticket->department; ?>', <?php echo $ticket->id?>)"></label>
+      <ul id="agent-list"></ul>
+    <?php endif; ?>
+    <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
+    <?php if (!$ticket->isClosed()): ?>
+      <form id="mark-closed" action="../actions/close_ticket.php" method="post">
+        <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
+        <input type="submit" value="Mark as closed">
+      </form>
+    <?php endif; ?>
+  </div>
   </section>
 <?php } ?>
 

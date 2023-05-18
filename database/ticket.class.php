@@ -39,6 +39,17 @@
         function markClosed(PDO $db) {
             // status is derived from closing date
             // assign closing date in the db
+            $stmt = $db->prepare('
+                UPDATE ticket
+                SET closing_date = ?
+                WHERE id = ?;
+            ');
+
+            $closing_date = $datetime = date('Y-m-d H:i:s', strtotime('now'));;
+            $stmt->execute(array($closing_date, $this->id));
+            
+            $this->closing_date = $closing_date;
+
         }
 
         function isAssigned() : bool {
@@ -59,6 +70,18 @@
             $stmt->execute(array($agent_id, $this->id));
 
             $this->agent_id = $agent_id;
+        }
+
+        function unassignAgent(PDO $db) {
+            $stmt = $db->prepare('
+                UPDATE ticket
+                SET agent_id = NULL
+                WHERE id = ?;
+            ');
+
+            $stmt->execute(array($this->id));
+
+            $this->agent_id = -1;
         }
 
         function getAgentUserId(PDO $db) : ?int {

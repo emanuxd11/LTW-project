@@ -120,7 +120,7 @@
   /* qualquer coisa */
 }
 
-ul#agent-list {
+.admin-view ul#agent-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -130,7 +130,7 @@ ul#agent-list {
   margin-left: 55px;
 }
 
-ul#agent-list li {
+.admin-view ul#agent-list li {
   padding: 6px;
   background-color: #f1f1f1;
   border: 1px solid #ccc;
@@ -142,6 +142,12 @@ ul#agent-list li {
   margin-top: 2px;
 }
 
-ul#agent-list li:hover {
+.admin-view ul#agent-list li:hover {
   background-color: #e5e5e5;
+}
+
+.admin-view form input[type="submit"] {
+  font-size: 14px;
+  margin: 0px;
+  padding: 6px;
 }
