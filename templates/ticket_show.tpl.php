@@ -10,6 +10,35 @@
   require_once(__DIR__ . '/../database/connection.db.php');
 ?>
 
+<?php function drawChat() { ?>
+  <div class="chat">
+    <h4>Chat</h4>
+
+    <div class="messages">
+
+      <!-- just as an example, obviously we'll retrieve this from the db using php -->
+      <div class="message">
+        <div class="sender">John</div>
+        <div class="text">Hey, how are you?</div>
+      </div>
+      <div class="message">
+        <div class="sender">Jane</div>
+        <div class="text">I'm good, thanks! How about you?</div>
+      </div>
+      <div class="message">
+        <div class="sender">John</div>
+        <div class="text">I'm doing great too!</div>
+      </div>
+    </div>
+
+    <form action="../actions/send_message.php" class="chat-input" method="post">
+      <input type="text" placeholder="Write a message..." />
+      <button>Send</button>
+    </form>
+
+  </div>
+<?php } ?>
+
 <?php function drawTicketStandard(Ticket $ticket, User $user) { ?>
   <section id="ticket">
     <h1><?= $ticket->title ?></h1>
@@ -75,6 +104,9 @@
       </form>
     <?php endif; ?>
   </div>
+
+  <?php drawChat() ?>
+
   </section>
 <?php } ?>
 
