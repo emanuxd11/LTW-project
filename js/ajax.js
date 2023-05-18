@@ -103,24 +103,54 @@ function checkPasswordsMatch() {
   }
 }
 
-// functions for dynamic search
+// functions for dynamic search of agents
 
 
-function agentSearchTest() {
-  const search_input = document.getElementById("agent-search");
-  const agent_list = document.getElementById("agent-list");
-  const agents = ["agent_002", "agent_001", "agent_007"]; // Replace with your list of agents
+function agentSearch(department, ticket_id) {
+  let query = document.getElementById('agent-search').value;
+  let data = new URLSearchParams();
   
-  const search_query = search_input.value.toLowerCase();
-  const filtered_agents = agents.filter(agent => agent.toLowerCase().includes(search_query));
-  
-  // Clear the existing list
-  agent_list.innerHTML = "";
-  
-  // Add filtered agents to the list
-  filtered_agents.forEach(agent => {
-    const li = document.createElement("li");
-    li.textContent = agent;
-    agent_list.appendChild(li);
+  data.append('query', `%${query}%`);
+  if (typeof department === 'string' && department.trim().length === 0) {
+    data.append('department', 'none');
+  } else {
+    data.append('department', department);
+  }
+
+  fetch("../actions/agent_search.php", {
+    method: 'POST',
+    body: data
+  }) 
+  .then(response => response.json())
+  .then(data => {
+    let agentList = document.getElementById('agent-list');
+    agentList.innerHTML = '';
+    data.forEach(agent => {
+      let li = document.createElement('li');
+      li.innerHTML = `${agent.username}`;
+      li.addEventListener('click', function() {
+        assignAgent(agent.id, ticket_id);
+      });
+      agentList.appendChild(li);
+    });
+  });
+}
+
+function assignAgent(agent_id, ticket_id) {
+  console.log(`assigned ticket ${ticket_id} to agent ${agent_id}`);
+
+  let data = new URLSearchParams();
+  data.append('agent_id', agent_id);
+  data.append('ticket_id', ticket_id);
+
+  fetch("../actions/assign_ticket.php", {
+    method: 'POST',
+    body: data
+  }).then(() => {
+    // Refresh the page
+    location.reload();
+  })
+  .catch(error => {
+    console.error('Error:', error);
   });
 }

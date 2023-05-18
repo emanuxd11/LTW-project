@@ -28,12 +28,15 @@
   drawTicketStandard($ticket, $user); ?>
   <div class="admin-view">
     <h4>Admin View</h4>
-    <?php if ($ticket->isAssigned()): ?>
-      <p>Agent: <a href="#"><?php echo "agent_name"; ?></a></p>
+    <?php if ($ticket->isAssigned()):
+        $db = getDatabaseConnection();
+        $agent_user_id = $ticket->getAgentUserId($db);
+        $agent_username = User::getUser($db, $agent_user_id)->username;
+      ?>
+      <p>Agent: <a href="<?php echo "../pages/profile.php?id=$agent_user_id"; ?>"><?php echo $agent_username; ?></a></p>
       <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
     <?php else: ?>
-      <p>Agent: N/A</p>
-      <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearchTest()">
+      <label>Assign an agent here <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearch('<?php echo $ticket->department; ?>', <?php echo $ticket->id?>)"></label>
       <ul id="agent-list"></ul>
     <?php endif; ?>
   </div>
@@ -45,7 +48,9 @@
     drawTicketStandard($ticket, $user);
   
     if ($ticket->isAssigned()) {
-      echo "<p>Agent: <a href=\"#\">agent_name</a></p>" . "\n";
+      $agent_user_id = $ticket->getAgentUserId($db);
+      $agent_username = User::getUserById($db, $agent_user_id)->username;
+      echo "<p>Agent: <a href=\"../pages/profile.php?id=$agent_user_id\">$agent_username</a></p>" . "\n";
     } else {
       echo "<p>Agent: N/A</p>" . "\n";
     }
