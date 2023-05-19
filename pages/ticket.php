@@ -22,15 +22,16 @@
 
   $ticket_id = intval($_GET['id']);
   $ticket = Ticket::getTicketByID($db, $ticket_id);
+  $messages = Message::getMessages($db, $ticket_id);
 
   drawHeader($session);
 
   if ($session->isSessionAgent($db)) {
-    drawTicketAgentView($ticket, User::getUser($db, $ticket->client_id));
+    drawTicketAgentView($ticket, User::getUser($db, $ticket->client_id), $messages, $session);
   } else if ($session->isSessionAdmin($db)) {
-    drawTicketAdminView($ticket, User::getUser($db, $ticket->client_id));
+    drawTicketAdminView($ticket, User::getUser($db, $ticket->client_id), $messages, $session);
   } else {
-    drawTicketClientView($ticket, User::getUser($db, $ticket->client_id));
+    drawTicketClientView($ticket, User::getUser($db, $ticket->client_id), $messages, $session);
   }
 
   drawFooter();

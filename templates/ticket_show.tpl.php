@@ -6,33 +6,33 @@
   require_once(__DIR__ . '/../database/ticket.class.php');
   
   require_once(__DIR__ . '/../database/user.class.php');
+
+  require_once(__DIR__ . '/../database/message.class.php');
   
   require_once(__DIR__ . '/../database/connection.db.php');
 ?>
 
-<?php function drawChat() { ?>
+<?php function drawChat(Ticket $ticket, $messages, Session $session) { ?>
   <div class="chat">
     <h4>Chat</h4>
 
-    <div class="messages">
+    <div class="messages" id="message-container">
 
-      <!-- just as an example, obviously we'll retrieve this from the db using php -->
-      <div class="message">
-        <div class="sender">John</div>
-        <div class="text">Hey, how are you?</div>
-      </div>
-      <div class="message">
-        <div class="sender">Jane</div>
-        <div class="text">I'm good, thanks! How about you?</div>
-      </div>
-      <div class="message">
-        <div class="sender">John</div>
-        <div class="text">I'm doing great too!</div>
-      </div>
+      <?php 
+        foreach ($messages as $message) { ?>
+          <div class=<?php echo $message->sender_id === $session->getId() ? "\"me\"" : "\"them\""; ?>>
+            <div class="sender"> <?php echo $message->sender_username ?> </div>
+            <div class="text"> <?php echo $message->text ?> </div>
+          </div>
+        <?php }
+      ?>
+
     </div>
 
     <form action="../actions/send_message.php" class="chat-input" method="post">
-      <input type="text" placeholder="Write a message..." />
+      <input type="text" name="text" placeholder="Write a message..." />
+      <input type="hidden" name="ticket_id" value=<?php echo $ticket->id; ?> />
+      <input type="hidden" name="sender_id" value=<?php echo $session->getId(); ?> />
       <button>Send</button>
     </form>
 
@@ -53,7 +53,7 @@
     <p>Posted by <a href="../profile.php?id=<?= $user->id ?>"><?= $user->username ?></a> on <?= $formattedDatetime ?></p>
 <?php } ?>
 
-<?php function drawTicketAdminView(Ticket $ticket, User $user) {
+<?php function drawTicketAdminView(Ticket $ticket, User $user, $messages, Session $session) {
   drawTicketStandard($ticket, $user); ?>
   <div class="admin-view">
     <h4>Admin View</h4>
@@ -63,10 +63,12 @@
         $agent_username = User::getUser($db, $agent_user_id)->username;
       ?>
       <p>Agent: <a href="<?php echo "../pages/profile.php?id=$agent_user_id"; ?>"><?php echo $agent_username; ?></a></p>
-      <form id="unassign" action="../actions/unassign_agent.php" method="post">
-        <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
-        <input type="submit" value="Unassign">
-      </form>
+      <?php if (!$ticket->isClosed()): ?>
+        <form id="unassign" action="../actions/unassign_agent.php" method="post">
+          <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
+          <input type="submit" value="Unassign">
+        </form>
+      <?php endif ?>
     <?php elseif (!$ticket->isClosed()): ?>
       <label>Assign an agent here <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearch('<?php echo $ticket->department; ?>', <?php echo $ticket->id?>)"></label>
       <ul id="agent-list"></ul>
@@ -82,36 +84,54 @@
   </section>
 <?php } ?>
 
-<?php function drawTicketAgentView(Ticket $ticket, User $user) {
+<?php function drawTicketAgentView(Ticket $ticket, User $user, $messages, Session $session) {
   drawTicketStandard($ticket, $user); ?>
   <div class="admin-view">
     <h4>Agent View</h4>
+    
     <?php if ($ticket->isAssigned()):
         $db = getDatabaseConnection();
         $agent_user_id = $ticket->getAgentUserId($db);
         $agent_username = User::getUser($db, $agent_user_id)->username;
       ?>
+
       <p>Agent: <a href="<?php echo "../pages/profile.php?id=$agent_user_id"; ?>"><?php echo $agent_username; ?></a></p>
+    
     <?php elseif (!$ticket->isClosed()): ?>
+    
       <label>Assign an agent here <input type="text" id="agent-search" placeholder="Search agents..." oninput="agentSearch('<?php echo $ticket->department; ?>', <?php echo $ticket->id?>)"></label>
       <ul id="agent-list"></ul>
+    
     <?php endif; ?>
+  
     <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
-    <?php if (!$ticket->isClosed()): ?>
+  
+    <?php if (!$ticket->isClosed() and $ticket->isAssigned() and $ticket->agent_id === $session->getId()): ?>
+  
       <form id="mark-closed" action="../actions/close_ticket.php" method="post">
         <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
         <input type="submit" value="Mark as closed">
       </form>
-    <?php endif; ?>
+  
+      <?php endif; ?>
   </div>
 
-  <?php drawChat() ?>
+  <?php 
+    if ($ticket->isAssigned() and $ticket->agent_id === $session->getId()) {
+      drawChat($ticket, $messages, $session);
+    }
+  ?>
 
   </section>
 <?php } ?>
 
-<?php function drawTicketClientView(Ticket $ticket, User $user) { ?>
+<?php function drawTicketClientView(Ticket $ticket, User $user, $messages, Session $session) { ?>
   <?php drawTicketStandard($ticket, $user); ?>
+  <?php 
+    if ($ticket->client_id === $session->getId()) {
+      drawChat($ticket, $messages, $session);
+    }
+  ?>
   </section>
 <?php } ?>
 

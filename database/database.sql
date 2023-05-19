@@ -59,27 +59,26 @@ create table ticket_version (
     ticket_id references ticket
 );
 
-create table replies (
+create table messages (
     id integer primary key autoincrement,
     text text,
     post_date text default (datetime('now', 'localtime')),
-    last_updated text,
     ticket_id integer references ticket,
-    agent_id integer references agent
+    sender_id integer references user
 );
 
-create table reply_version (
-    id integer primary key autoincrement,
-    text text,
-    version_date text,
-    reply_id references reply
-);
+-- create table reply_version (
+--     id integer primary key autoincrement,
+--     text text,
+--     version_date text,
+--     reply_id references reply
+-- );
 
 create table hashtag (
     content text primary key
 );
 
--- junction table para a relação *---* de agent e department
+-- junction table para a relação *---* de ticket e hashtag
 create table ticket_hashtag (
     ticket_id references ticket,
     hashtag_id references hashtag,
