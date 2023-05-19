@@ -80,7 +80,7 @@
             $searchText = "";
         }
         else {
-            $searchText = $_GET["search"];
+            $searchText = $_GET["searchText"];
         }
         
         $id_array = array_slice(array_reverse(Ticket::getTicketIdsFiltered($db, $department, $sortOrder, $searchText)), 0, 5);
@@ -105,16 +105,27 @@
 
 <?php function DrawSearchOptions() { ?>
   <form action="../pages/index.php" method="get">
+    <?php
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare('SELECT name FROM department');
+      $stmt->execute();
+      $departments = $stmt->fetchAll();
+    ?>
+
     <div id="searchOptions">
       <div class="searchOptionsSection">
         <label for="department" >Department: </label>
-        
+
         <select id="departmentSelect" name="departmentChoice">
-          <option value="all">All Departments</option>
-          <option value="Support">Accounting</option>
-          <option value="Sales">Sales</option>
-          <option value="Marketing">Marketing</option>
-          <option value="IT">IT</option>
+          <?php
+            echo "<option value=\"all\">All Departments</option>";
+
+            foreach($departments as $department) {
+              $department_name = $department['name'];
+
+              echo "<option value=$department_name>$department_name</option>";
+            }
+          ?>
         </select>
       </div>
 
