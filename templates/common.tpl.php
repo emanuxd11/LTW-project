@@ -41,14 +41,13 @@
       ?>
     </header>
   
-    <section id="messages">
+    <!-- <section id="messages">
       <?php foreach ($session->getMessages() as $messsage) { ?>
         <article class="<?=$messsage['type']?>">
           <?=$messsage['text']?>
         </article>
       <?php } ?>
-      
-    </section>
+    </section> -->
 
     <main>
 <?php } ?>

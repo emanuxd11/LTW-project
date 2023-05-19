@@ -30,7 +30,7 @@
     </div>
 
     <form action="../actions/send_message.php" class="chat-input" method="post">
-      <input type="text" name="text" placeholder="Write a message..." />
+      <input type="text" name="text" placeholder="Write a message..." autocomplete="off" autofocus />
       <input type="hidden" name="ticket_id" value=<?php echo $ticket->id; ?> />
       <input type="hidden" name="sender_id" value=<?php echo $session->getId(); ?> />
       <button>Send</button>
@@ -50,7 +50,7 @@
     $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
     $formattedDatetime = $datetime->format('M d Y \a\t H:i');
     ?>
-    <p>Posted by <a href="../profile.php?id=<?= $user->id ?>"><?= $user->username ?></a> on <?= $formattedDatetime ?></p>
+    <p>Posted by <a href="../pages/profile.php?id=<?= $user->id ?>"><?= $user->username ?></a> on <?= $formattedDatetime ?></p>
 <?php } ?>
 
 <?php function drawTicketAdminView(Ticket $ticket, User $user, $messages, Session $session) {
@@ -81,6 +81,9 @@
       </form>
     <?php endif; ?>
   </div>
+
+  <?php drawChat($ticket, $messages, $session); ?>
+
   </section>
 <?php } ?>
 
