@@ -81,3 +81,34 @@
     </ul>
   </section>
 <?php } ?>
+
+<?php function DrawSearchOptions() { ?>
+  <form action="../pages/index.php" method="get">
+    <div id="searchOptions">
+      <div class="searchOptionsSection">
+        <label for="department" >Department: </label>
+        
+        <select id="departmentSelect" name="departmentChoice">
+          <option value="all">All Departments</option>
+          <option value="Support">Support</option>
+          <option value="Sales">Sales</option>
+          <option value="Marketing">Marketing</option>
+        </select>
+      </div>
+
+      <div class="searchOptionsSection">
+        <label for="sortOrder">Sort by: </label> 
+        
+        <select id="sortOrder" name="sortOrder">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <input type="submit" class="searchButton" value="Search">
+      </div>
+    </div> 
+  </form>
+<?php } ?> 
