@@ -100,10 +100,6 @@
         static function getTicketIdsFiltered(PDO $db, $department, $sortOrder, $searchText) {
             
             if ($department != "all") {
-                $stmt = $db->prepare("SELECT id FROM department WHERE name = '$department'");
-                $stmt->execute();
-                $department = $stmt->fetch()["id"];
-    
                 $query = "SELECT id FROM ticket WHERE department = '$department'";
             } else {
                 $query = "SELECT id FROM ticket WHERE 1=1";
@@ -114,9 +110,9 @@
             }
     
             if($sortOrder == "newest") {
-                $query = $query . " ORDER BY id DESC";
+                $query = $query . " ORDER BY post_date ASC";
             } else if($sortOrder == "oldest") {
-                $query = $query . " ORDER BY id ASC";
+                $query = $query . " ORDER BY post_date DESC";
             }
             
     
