@@ -150,5 +150,38 @@
                 $ticket['img_reference'] === null ? "" : $ticket['image_reference']
             );
         }
+
+        static function getTicketIdsFiltered(PDO $db, $department, $sortOrder, $searchText) {
+            
+            if ($department != "all") {
+                $query = "SELECT id FROM ticket WHERE department = '$department'";
+            } else {
+                $query = "SELECT id FROM ticket WHERE 1=1";
+            }
+    
+            if($searchText != "") {
+                $query = $query . " AND (title LIKE '%$searchText%' OR description LIKE '%$searchText%')";
+            }
+    
+            if($sortOrder == "newest") {
+                $query = $query . " ORDER BY post_date ASC";
+            } else if($sortOrder == "oldest") {
+                $query = $query . " ORDER BY post_date DESC";
+            }
+            
+    
+            //Obtain the tickets from the database
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+    
+            
+            $ticket_ids_array = array();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $ticket_ids_array[] = $row['id'];
+            }
+    
+            return $ticket_ids_array;
+        }
     }
 ?>

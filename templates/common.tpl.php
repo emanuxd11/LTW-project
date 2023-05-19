@@ -28,10 +28,6 @@
   <body>
     <header>
       <h3><a href="/">No Name Tickets</a></h3>
-      <div class="search-bar">
-        <input type="text" placeholder="Search...">
-        <button>Search</button>
-      </div>
       <?php 
         if ($session->isLoggedIn()) {
           drawLogoutForm($session);

@@ -13,6 +13,7 @@
   $db = getDatabaseConnection();
 
   drawHeader($session);
+  DrawSearchOptions();
   drawTicketsPreview($session, $db);
   drawTicketFormLink($session);
   drawFooter();

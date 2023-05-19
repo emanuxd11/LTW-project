@@ -143,7 +143,28 @@
     <h2>Recent Tickets</h2>
     <ul class="ticket-list">
       <?php 
-        $id_array = array_slice(array_reverse(Ticket::getAllTicketIds($db)), 0, 5);
+        if ($_GET["departmentChoice"] == null) { //If the user didn't select a department, the default is "all"
+          $department = "all";
+        }
+        else {
+          $department = $_GET["departmentChoice"];
+        }
+        
+        if ($_GET["sortOrder"] == null) { //If the user didn't select a sort order, the default is "newest"
+          $sortOrder = null;
+        }
+        else {
+          $sortOrder = $_GET["sortOrder"];
+        }
+        
+        if (($_GET["searchText"] == null) or ($_GET["searchText"] == "")) { //If the user didn't search for anything, the default is an empty string
+            $searchText = "";
+        }
+        else {
+            $searchText = $_GET["searchText"];
+        }
+        
+        $id_array = array_slice(array_reverse(Ticket::getTicketIdsFiltered($db, $department, $sortOrder, $searchText)), 0, 5);
         foreach($id_array as &$id) {
           $ticket = Ticket::getTicketById($db, $id);
           echo "<li>" . "\n";
@@ -162,3 +183,46 @@
     </ul>
   </section>
 <?php } ?>
+
+<?php function DrawSearchOptions() { ?>
+  <form action="../pages/index.php" method="get">
+    <?php
+      $db = getDatabaseConnection();
+      $stmt = $db->prepare('SELECT name FROM department');
+      $stmt->execute();
+      $departments = $stmt->fetchAll();
+    ?>
+
+    <div id="searchOptions">
+      <div class="searchOptionsSection">
+        <label for="department" >Department: </label>
+
+        <select id="departmentSelect" name="departmentChoice">
+          <?php
+            echo "<option value=\"all\">All Departments</option>";
+
+            foreach($departments as $department) {
+              $department_name = $department['name'];
+
+              echo "<option value=$department_name>$department_name</option>";
+            }
+          ?>
+        </select>
+      </div>
+
+      <div class="searchOptionsSection">
+        <label for="sortOrder">Sort by: </label> 
+        
+        <select id="sortOrder" name="sortOrder">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+        </select>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search..." name="searchText">
+        <input type="submit" class="searchButton" value="Search">
+      </div>
+    </div> 
+  </form>
+<?php } ?> 
