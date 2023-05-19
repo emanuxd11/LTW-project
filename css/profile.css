@@ -1,0 +1,16 @@
+.profile-info {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    width: 50%;
+
+    border: 1px solid #ccc;
+    background-color: bisque;
+}
+
+.profile-info #default_profile_image {
+    width: 30%;
+    height: 200px;
+    background-color: #ccc;
+}
