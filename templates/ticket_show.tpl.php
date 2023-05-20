@@ -81,3 +81,59 @@
     </ul>
   </section>
 <?php } ?>
+
+<?php function drawUserTickets(PDO $db, $user_id) { ?>
+  <section class="user-tickets">
+    <?php 
+      $user = User::getUser($db, $user_id);
+      $username = $user->username;
+
+      echo '<h3>' . $username . '\'s Tickets:</h3>' . "\n";
+    ?>
+  
+    <ul class="ticket-list">
+      <?php
+        $id_array = array_reverse(Ticket::getUserTickets($db, $user_id));
+        foreach($id_array as &$id) {
+          $ticket = Ticket::getTicketById($db, $id);
+          echo "<li>" . "\n";
+          echo "<h4><a href=\"../pages/ticket.php?id=$ticket->id\">$ticket->title</a></h4>" . "\n";
+
+          $description = substr($ticket->description, 0, 50) . "...";
+          echo "<p>$description</p>" . "\n";
+          
+          $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
+          $datetime = $datetime->format('M d Y \a\t H:i');
+          $user = User::getUser($db, $ticket->client_id);
+          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/profile.php?id=$user->id\">$user->username</a> on $datetime</span>" . "\n";
+          // acrescentar hashtags aqui nalgum lado mais tarde
+        }
+      ?>
+    </ul>
+  </section>
+<?php } ?>
+
+<?php function drawMyTickets(Session $session, PDO $db) { ?>
+  <section class="my-tickets">
+    <h3>My Tickets </h3>
+    <ul class="ticket-list">
+      <?php
+        $id_array = array_reverse(Ticket::getUserTickets($db, $session->getId()));
+        foreach($id_array as &$id) {
+          $ticket = Ticket::getTicketById($db, $id);
+          echo "<li>" . "\n";
+          echo "<h4><a href=\"../pages/ticket.php?id=$ticket->id\">$ticket->title</a></h4>" . "\n";
+
+          $description = substr($ticket->description, 0, 50) . "...";
+          echo "<p>$description</p>" . "\n";
+          
+          $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
+          $datetime = $datetime->format('M d Y \a\t H:i');
+          $user = User::getUser($db, $ticket->client_id);
+          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/profile.php?id=$user->id\">$user->username</a> on $datetime</span>" . "\n";
+          // acrescentar hashtags aqui nalgum lado mais tarde
+        }
+      ?>
+    </ul>
+  </section>
+<?php } ?>

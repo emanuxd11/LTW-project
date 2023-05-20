@@ -92,9 +92,25 @@
                 $ticket['post_date'],
                 $ticket['closing_date'] === null ? "" : $ticket['closing_date'],
                 $ticket['original_poster'],
-                $ticket['agent_id'] === null ? -1 : $ticket['agent_id'],
+                $ticket['agent_id'] === null ? -1 : intval($ticket['agent_id']),
                 $ticket['image_reference'] === null ? "" : $ticket['image_reference']
             );
+        }
+
+        static function getUserTickets(PDO $db, int $user_id) : array {
+            $stmt = $db->prepare('
+                SELECT id 
+                FROM ticket 
+                WHERE original_poster = ?
+            ');
+            $stmt->execute(array($user_id));
+    
+            $id_array = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $id_array[] = $row['id'];
+            }
+    
+            return $id_array;
         }
     }
 ?>
