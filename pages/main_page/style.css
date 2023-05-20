@@ -77,12 +77,34 @@ main #searchOptions {
     margin: 10px;
     background-color: #FFFFFF;
     text-align: left;
+
+    transition: transform ease 0.3s;
 }
 
 .ticket:hover {
-    background-color: #FFE4CF;
     cursor: pointer;
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    transform: translate(0px,-5px);
 }
+
+.ticket blockquote {
+    padding: 3px 10px;
+    border-radius: 4px;
+
+    position: relative;
+    float: right;
+    top: -55px;
+    right: -20px;
+}
+
+.ticket blockquote[value="Open"] {
+    background-color: #03A81C;
+}
+
+.ticket blockquote[value="Closed"] {
+    background-color: #FF0000;
+}
+
 
 .ticket h1 {
     font-size: 20px;
@@ -90,10 +112,14 @@ main #searchOptions {
 }
 
 .ticket h2 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
 }
 
-.ticket h3 {
-    font-size: 14px;
+.ticket h3{
+    font-size: 16px;
+}
+
+.ticket h4 {
+    font-size: 16px;
 }

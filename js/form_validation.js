@@ -16,7 +16,7 @@ function checkValidDescription() {
   const title_input = document.getElementById("description");
   const description_status = document.getElementById("description_status");
   const submit_button = document.getElementById("submit-button");
-  if (title_input.value.length < 8) {
+  if (title_input.value.length < 20) {
     description_status.innerHTML = "Description must be at least 20 characters long";
     description_status.style.color = "red";
     submit_button.disabled = true;

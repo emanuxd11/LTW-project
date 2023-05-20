@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Ticket Manager</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>2
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 
         <div id="registry_section">
             <p>In order to enjoy Ticket Manager at its full potential, please:</p>
-            <a href="url_login">Sign In</a> | <a href="url_register">Sign Up</a>
+            <a href="../login.php">Sign In</a> | <a href="../register.php">Sign Up</a>
         </div>
     </header>
 
@@ -66,13 +66,57 @@
         </div>
 
         <div id="Agent" class="tabsection" style="display: none">
-            <h3>Agent</h3>
-            <p>An agent can create, reply and alter tickets that belong to his department</p>
+            <div id="searchOptions">
+                <form action="main.php" method="get">
+                    <label for="department" >Department: </label> <select id="departmentSelect" name="departmentChoice">
+                        <option value="all">All Departments</option>
+                        <option value="Support">Support</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+
+                    <label for="sortOrder">&nbsp Sort by: </label> <select id="sortOrder" name="sortOrder">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                    
+                    <input type="submit" value="Search" id="searchButton">
+
+                    <input type="text" id="ticketSearchBar" placeholder="Input your text here..." name="ticketSearchBar">
+                </form>
+            </div>
+            
+            <?php 
+                $ticket_array = loadTickets(false);
+                DisplayTickets($ticket_array);
+            ?>
         </div>
 
         <div id="Admin" class="tabsection" style="display: none">
-            <h3>Admin</h3>
-            <p>An admin has full control over the tickets, being able to create, reply, delete and alter any tickets of any department</p>
+            <div id="searchOptions">
+                <form action="main.php" method="get">
+                    <label for="department" >Department: </label> <select id="departmentSelect" name="departmentChoice">
+                        <option value="all">All Departments</option>
+                        <option value="Support">Support</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+
+                    <label for="sortOrder">&nbsp Sort by: </label> <select id="sortOrder" name="sortOrder">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                    
+                    <input type="submit" value="Search" id="searchButton">
+
+                    <input type="text" id="ticketSearchBar" placeholder="Input your text here..." name="ticketSearchBar">
+                </form>
+            </div>
+            
+            <?php 
+                $ticket_array = loadTickets(false);
+                DisplayTickets($ticket_array);
+            ?>
         </div>
     </main>
 </body>

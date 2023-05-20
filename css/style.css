@@ -137,7 +137,7 @@ main {
   flex: 1;
 
   background-color: #7f0000;
-  /* height: calc(100% - 130px); */
+  /* height: 70%; */
   display: flex;
   justify-content: center;
   align-items: center;

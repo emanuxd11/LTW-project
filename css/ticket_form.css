@@ -30,8 +30,8 @@ form:not(span) {
   gap: 0.5em;
 }
 
-form input[type="text"],
-form textarea {
+#ticket-form form input[type="text"],
+#ticket-form form textarea {
   width: 100%;
   padding: 10px;
   font-size: 16px;
