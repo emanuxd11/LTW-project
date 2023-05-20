@@ -7,8 +7,8 @@
         echo '<div class="profile">';
             echo '<img id="default_profile_image" src="/../images/default-user-image.png" alt="default-user-image.png" title="Your Profile Picture">';
             echo '<div class="profile-info">';
-                echo '<h2>Name: ' . $session->getName() . '<img class="edit_button" id="edit_name_button" src="/../images/edit_button.png" alt="edit_button.png" title="Change Name">' . '</h2>';
-                echo '<h2>Username: ' . $session->getUsername() . '<img class="edit_button" id="edit_username_button" src="/../images/edit_button.png" alt="edit_button.png" title="Change Name">' . '</h2>';
+                echo '<h2>Name: ' . $session->getName() . '<img class="edit_button" id="edit_name_button" src="/../images/edit_button.png" alt="edit_button.png" title="Change Name">' . '<img class="confirm_button" id="confirm_name_button" src="/../images/check_button.png" alt="check_button.png" title="Confirm Name Change">' . '</h2>';
+                echo '<h2>Username: ' . $session->getUsername() . '<img class="edit_button" id="edit_username_button" src="/../images/edit_button.png" alt="edit_button.png" title="Change Name">' . '<img class="confirm_button" id="confirm_username_button" src="/../images/check_button.png" alt="check_button.png" title="Confirm Username Change">' . '</h2>';
                 echo '<h2>Joined NNTickets on: ' . $join_date . '</h2>';
                 echo '<h2>Account Type: ';
                     if($session->isSessionAdmin($db)) {
