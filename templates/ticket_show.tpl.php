@@ -176,7 +176,15 @@
           $datetime = DateTime::createFromFormat('Y-m-d H:i:s', $ticket->creation_date);
           $datetime = $datetime->format('M d Y \a\t H:i');
           $user = User::getUser($db, $ticket->client_id);
-          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/user.php?id=$user->id\">$user->username</a> on $datetime</span>" . "\n";
+
+          echo "<span class=\"ticket-date\">Posted by ";
+          if ($user->id == $session->getId()) {
+            echo "<a href=\"../pages/profile.php\">You</a>";
+          }
+          else {
+            echo "<a href=\"../pages/user.php?id=$user->id\">$user->username</a>";
+          }
+          echo " on $datetime</span>" . "\n";
           // acrescentar hashtags aqui nalgum lado mais tarde
         }
       ?>
@@ -233,7 +241,7 @@
           $datetime = $datetime->format('M d Y \a\t H:i');
           $user = User::getUser($db, $ticket->client_id);
           $username = $user->username;
-          echo "<span class=\"ticket-date\">Posted by <a href=\"../pages/profile.php\">$username</a> on $datetime</span>" . "\n";
+          echo "<span class=\"ticket-date\">Posted by You on $datetime</span>" . "\n";
           // acrescentar hashtags aqui nalgum lado mais tarde
         }
       ?>
