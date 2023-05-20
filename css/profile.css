@@ -23,3 +23,15 @@
     width: 70%;
     margin-left: 15px;
 }
+
+.profile .profile-info h2 {
+    overflow: hidden;
+    position: relative;
+}
+
+.profile .profile-info .edit_button {
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    position: absolute
+}
