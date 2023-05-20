@@ -38,7 +38,7 @@ create table agent_department (
     primary key (agent_id, department_id)
 );
 
-create table ticket ( --here we should also include a field for the client id
+create table ticket (
     id integer primary key autoincrement,
     department integer references department,
     original_poster integer references user,

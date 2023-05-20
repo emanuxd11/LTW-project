@@ -17,13 +17,13 @@ use function PHPSTORM_META\map;
         }
         
         if ($_GET["sortOrder"] == null) { //If the user didn't select a sort order, the default is "newest"
-            $sortOrder = null;
+            $sortOrder = "newest";
         }
         else {
             $sortOrder = $_GET["sortOrder"];
         }
         
-        if ($_GET["ticketSearchBar"] == null) { //If the user didn't search for anything, the default is an empty string
+        if ($_GET["ticketSearchBar"] == null or $_GET["ticketSearchBar"] == "") { //If the user didn't search for anything, the default is an empty string
             $searchBar = "";
         }
         else {
@@ -51,9 +51,9 @@ use function PHPSTORM_META\map;
         }
 
         if($sortOrder == "newest") {
-            $query = $query . " ORDER BY id DESC";
+            $query = $query . " ORDER BY post_date DESC";
         } else if($sortOrder == "oldest") {
-            $query = $query . " ORDER BY id ASC";
+            $query = $query . " ORDER BY post_date ASC";
         }
         
 
@@ -73,7 +73,7 @@ use function PHPSTORM_META\map;
             $stmt->execute(array($department_id));
             $department_name = $stmt->fetch()["name"];
             
-            $ticket = new Ticket($ticket["id"], $ticket["title"], $ticket["description"], $department_name, null); //null is the client name, add it later
+            $ticket = new Ticket($ticket["id"], $ticket["title"], $ticket["description"], $department_name, null, $ticket["date"]); //null is the client name, add it later
             array_push($ticket_array, $ticket);
         }
 
