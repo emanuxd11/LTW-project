@@ -37,8 +37,6 @@
         }
 
         function markClosed(PDO $db) {
-            // status is derived from closing date
-            // assign closing date in the db
             $stmt = $db->prepare('
                 UPDATE ticket
                 SET closing_date = ?
@@ -49,7 +47,6 @@
             $stmt->execute(array($closing_date, $this->id));
             
             $this->closing_date = $closing_date;
-
         }
 
         function isAssigned() : bool {

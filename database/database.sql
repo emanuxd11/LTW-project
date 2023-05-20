@@ -88,5 +88,6 @@ create table ticket_hashtag (
 create table faq (
     id integer primary key autoincrement,
     title text,
-    description text
+    description text,
+    answer text
 );
