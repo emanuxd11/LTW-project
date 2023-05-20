@@ -15,6 +15,7 @@
     <!-- css -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ticket_form.css">
+    <link rel="stylesheet" href="../css/faq_form.css">
     <link rel="stylesheet" href="../css/ticket_page.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" >
@@ -36,14 +37,6 @@
         }
       ?>
     </header>
-  
-    <!-- <section id="messages">
-      <?php foreach ($session->getMessages() as $messsage) { ?>
-        <article class="<?=$messsage['type']?>">
-          <?=$messsage['text']?>
-        </article>
-      <?php } ?>
-    </section> -->
 
     <main>
 <?php } ?>
@@ -56,6 +49,10 @@
       echo "<a href=\"../pages/login.php\" id=\"ticket-form-link\">Having issues? Sign in to create a new ticket!</a>";
     }
   ?>
+<?php } ?>
+
+<?php function drawFaqFormLink() { ?>
+  <a href="../pages/faq_form.php" id="faq-form-link">Tired of seeing similar questions? Click here to create a FAQ.</a>;
 <?php } ?>
 
 <?php function drawLoginRegisterLink() { ?>

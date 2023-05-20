@@ -1,0 +1,92 @@
+#faq-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 700px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-row-gap: 20px;
+    margin: 50px auto;
+  }
+    
+  #faq-form h1 {
+    color: #7f0000;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 10px;
+    grid-column: 1 / -1;
+  }
+  
+  form label {
+    color: #666;
+    font-size: 18px;
+    grid-column: 1 / -1;
+    margin-top: 0.25em;
+  }
+  
+  form:not(span) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  
+  #faq-form form input[type="text"],
+  #faq-form form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid;
+    border-radius: 6px;
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    grid-column: 1 / -1;
+    font-family: Arial, sans-serif;
+  }
+  
+  form textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  form input[type="text"]::placeholder,
+  form textarea::placeholder {
+    color: #999;
+  }
+  
+  form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid;
+    border-radius: 6px;
+    margin-bottom: 0px;
+    box-sizing: border-box;
+    grid-column: 1 / -1;
+  }
+  
+  form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    grid-column: 1 / -1;
+  }
+  
+  form input[type="submit"]:hover {
+    background-color: #388E3C;
+  }
+  
+  #submit-button:disabled {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'");
+    background-position: center;
+    cursor: not-allowed;
+  }
+  
+  #submit-button:hover:disabled {
+    background-color: #81C784;
+  }

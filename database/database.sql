@@ -67,13 +67,6 @@ create table messages (
     sender_id integer references user
 );
 
--- create table reply_version (
---     id integer primary key autoincrement,
---     text text,
---     version_date text,
---     reply_id references reply
--- );
-
 create table hashtag (
     content text primary key
 );
@@ -88,6 +81,5 @@ create table ticket_hashtag (
 create table faq (
     id integer primary key autoincrement,
     title text,
-    description text,
     answer text
 );

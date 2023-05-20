@@ -4,21 +4,19 @@
     class Faq {
         public int $id;
         public string $title;
-        public string $description;
         public string $answer;
 
-        function __construct($id, $title, $description, $answer) {
+        function __construct($id, $title, $answer) {
             $this->id = $id;
             $this->title = $title;
-            $this->description = $description;
             $this->answer = $answer;
         }
 
-        static function submitFaq(PDO $db, $title, $description, $answer) {
+        static function submitFaq(PDO $db, $title, $answer) {
             $stmt = $db->prepare('
-                INSERT INTO faq (title, description, answer) VALUES ( ?, ?, ? )
+                INSERT INTO faq (title, answer) VALUES ( ?, ? )
             ');
-            $stmt->execute(array($title, $description, $answer));
+            $stmt->execute(array($title, $answer));
         }
 
         static function getAllFaqIds(PDO $db) {
@@ -49,7 +47,6 @@
             return new faq (
                 $faq['id'],
                 $faq['title'],
-                $faq['description'],
                 $faq['answer']
             );
         }

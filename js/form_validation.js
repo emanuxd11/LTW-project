@@ -25,3 +25,17 @@ function checkValidDescription() {
     submit_button.disabled = false;
   }
 }
+
+function checkValidAnswer() {
+  const title_input = document.getElementById("answer");
+  const description_status = document.getElementById("answer_status");
+  const submit_button = document.getElementById("submit-button");
+  if (title_input.value.length < 20) {
+    description_status.innerHTML = "Answer must be at least 20 characters long";
+    description_status.style.color = "red";
+    submit_button.disabled = true;
+  } else {
+    description_status.innerHTML = "";
+    submit_button.disabled = false;
+  }
+}
