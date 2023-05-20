@@ -188,12 +188,12 @@
       $user = $stmt->fetch();
       
       return new User (
-        $user['id'],
-        $user['first_name'],
-        $user['last_name'],
-        $user['username'],
-        $user['email'],
-        $user['creation_date']
+        (int)$user['id'],
+        (string)$user['first_name'],
+        (string)$user['last_name'],
+        (string)$user['username'],
+        (string)$user['email'],
+        (string)$user['creation_date']
       );
     }
   }
