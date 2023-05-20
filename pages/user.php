@@ -13,8 +13,12 @@
     require_once(__DIR__ . '/../templates/user_page.tpl.php');
   
     $db = getDatabaseConnection();
+
+    $user_id = (int)$_GET['id'];
+
+    $user = User::getUser($db, $user_id);
   
     drawHeader($session);
-    drawProfileInfo($session, $db);
+    drawUserInfo($user, $db);
     drawFooter();
 ?>

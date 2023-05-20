@@ -1,0 +1,31 @@
+.user-profile {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    width: 50%;
+
+    border: 1px solid #ccc;
+    background-color: white;
+
+    display: flex;
+}
+
+.user-profile #default_profile_image {
+    order: 0;
+    width: 30%;
+    height: 200px;
+    background-color: #ccc;
+}
+
+.user-profile .user-info {
+    order: 1;
+    width: 70%;
+    margin-left: 15px;
+}
+
+/*
+.profile .user-info h2 {
+    margin:
+}
+*/

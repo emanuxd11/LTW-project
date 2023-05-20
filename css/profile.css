@@ -35,3 +35,7 @@
     margin-right: 5px;
     position: absolute
 }
+
+.profile .profile-info .edit_button:hover {
+    cursor: pointer;
+}
