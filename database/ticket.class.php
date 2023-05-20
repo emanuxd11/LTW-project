@@ -92,7 +92,7 @@
                 $ticket['post_date'],
                 $ticket['closing_date'] === null ? "" : $ticket['closing_date'],
                 $ticket['original_poster'],
-                $ticket['agent_id'] === null ? -1 : $ticket['agent_id'],
+                $ticket['agent_id'] === null ? -1 : (int)$ticket['agent_id'],
                 $ticket['image_reference'] === null ? "" : $ticket['image_reference']
             );
         }
