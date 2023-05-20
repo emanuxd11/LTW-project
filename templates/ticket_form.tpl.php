@@ -28,7 +28,7 @@
         ?>
       </select>
 
-      <label for="hashtags">Hashtags (não funciona, fazer isto mais tarde porque é complexo):</label>
+      <label for="hashtags">Hashtags (not working):</label>
       <input type="text" id="hashtags" name="hashtags">
 
       <input type="submit" id="submit-button" value="Submit Ticket" disabled>

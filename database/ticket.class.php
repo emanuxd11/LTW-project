@@ -1,5 +1,4 @@
 <?php
-    // TODO: implement page to view ticket
     //       implement adding images to tickets in form and database       
 
     declare(strict_types = 1);
@@ -11,19 +10,17 @@
         public string $department;
         public string $title;
         public string $description;
-        public bool $status_closed;
         public string $creation_date;
         public string $closing_date;
         public int $client_id;
         public int $agent_id;
         public string $image_rfr;
 
-        function __construct($id, $department, $title, $description, $status, $creation_date, $closing_date, $client_id, $agent_id, $image_rfr) {
+        function __construct($id, $department, $title, $description, $creation_date, $closing_date, $client_id, $agent_id, $image_rfr) {
             $this->id = $id;
             $this->department = $department;
             $this->title = $title;
             $this->description = $description;
-            $this->status = $status;
             $this->creation_date = $creation_date;
             $this->closing_date = $closing_date;
             $this->client_id = $client_id;
@@ -42,10 +39,68 @@
         function markClosed(PDO $db) {
             // status is derived from closing date
             // assign closing date in the db
+            $stmt = $db->prepare('
+                UPDATE ticket
+                SET closing_date = ?
+                WHERE id = ?;
+            ');
+
+            $closing_date = $datetime = date('Y-m-d H:i:s', strtotime('now'));;
+            $stmt->execute(array($closing_date, $this->id));
+            
+            $this->closing_date = $closing_date;
+
         }
 
         function isAssigned() : bool {
             return $this->agent_id !== -1;
+        }
+
+        function hasDepartment() : bool {
+            return $this->department !== "";
+        }
+
+        function assignAgent(PDO $db, $agent_id) {
+            $stmt = $db->prepare('
+                UPDATE ticket
+                SET agent_id = ?
+                WHERE id = ?;
+            ');
+
+            $stmt->execute(array($agent_id, $this->id));
+
+            $this->agent_id = $agent_id;
+        }
+
+        function unassignAgent(PDO $db) {
+            $stmt = $db->prepare('
+                UPDATE ticket
+                SET agent_id = NULL
+                WHERE id = ?;
+            ');
+
+            $stmt->execute(array($this->id));
+
+            $this->agent_id = -1;
+        }
+
+        function getAgentUserId(PDO $db) : ?int {
+            /* if (!$this->isAssigned) {
+                return null;
+            } */
+
+            $stmt = $db->prepare('
+                SELECT user.id
+                FROM agent 
+                INNER JOIN user ON agent.user_id=user.id 
+                WHERE agent.id=?;
+            ');
+
+            $stmt->execute(array($this->agent_id));
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $id = intval($row['id']);
+
+            return $id;
         }
 
         static function submitTicket(PDO $db, $department, $title, $description, $client_id) {
@@ -88,13 +143,45 @@
                 $ticket['department'] === null ? "" : $ticket['department'],
                 $ticket['title'],
                 $ticket['description'],
-                $ticket['status'],
                 $ticket['post_date'],
                 $ticket['closing_date'] === null ? "" : $ticket['closing_date'],
                 $ticket['original_poster'],
-                $ticket['agent_id'] === null ? -1 : $ticket['agent_id'],
-                $ticket['image_reference'] === null ? "" : $ticket['image_reference']
+                $ticket['agent_id'] === null ? -1 : intval($ticket['agent_id']),
+                $ticket['img_reference'] === null ? "" : $ticket['image_reference']
             );
+        }
+
+        static function getTicketIdsFiltered(PDO $db, $department, $sortOrder, $searchText) {
+            
+            if ($department != "all") {
+                $query = "SELECT id FROM ticket WHERE department = '$department'";
+            } else {
+                $query = "SELECT id FROM ticket WHERE 1=1";
+            }
+    
+            if($searchText != "") {
+                $query = $query . " AND (title LIKE '%$searchText%' OR description LIKE '%$searchText%')";
+            }
+    
+            if($sortOrder == "newest") {
+                $query = $query . " ORDER BY post_date ASC";
+            } else if($sortOrder == "oldest") {
+                $query = $query . " ORDER BY post_date DESC";
+            }
+            
+    
+            //Obtain the tickets from the database
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+    
+            
+            $ticket_ids_array = array();
+
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $ticket_ids_array[] = $row['id'];
+            }
+    
+            return $ticket_ids_array;
         }
     }
 ?>

@@ -30,10 +30,9 @@ h3 {
 }
 
 .search-bar {
-  order: 2;
   display: flex;
   align-items: center;
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 .search-bar input[type="text"] {
@@ -43,12 +42,14 @@ h3 {
   margin-right: 10px;
 }
 
-.search-bar button {
+.search-bar .searchButton {
   padding: 5px 10px;
   background-color: #4CAF50;
   border: none;
   border-radius: 5px;
   color: white;
+  margin-top: 0px;
+  font-size: 16px;
 }
 
 .login-register {
@@ -78,6 +79,13 @@ header a:hover {
   color: #4ca2ff;
 }
 
+header h3 {
+  margin: 0;
+  margin-left: 10px;
+  padding: 0;
+  order: 0;
+}
+
 header h3 a {
   color: #333;
   text-decoration: none;
@@ -89,16 +97,53 @@ header h3 a:hover {
   color: #333;
 }
 
+#searchOptions {
+  order: 1;
+  display: flex;
+
+  width: 690px;
+
+  background-color: #f2f2f2;
+  border-color: gray;
+  border-radius: 5px;
+
+  padding: 10px;
+  margin: 5px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+#searchOptions > div {
+  flex: 1;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#searchOptions > .searchOptionsSection > select {
+  width: 150px;
+  height: 30px;
+  font-size: 15px;
+  padding: 5px;
+  margin: 5px;
+}
+
+#searchOptions > .searchOptionsSection > label{
+  font-size: 16px;
+  margin: 5px;
+}
+
 main {
   flex: 1;
 
   background-color: #7f0000;
-  /* height: calc(100% - 130px); */
+  /* height: 70%; */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
   flex-direction: column;
+  padding: 10px;
 }
 
 #messages {
