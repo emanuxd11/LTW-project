@@ -196,5 +196,36 @@
         (string)$user['creation_date']
       );
     }
+
+    static function getAllAgents($db, $search_query) {
+      $stmt = $db->prepare('
+        SELECT agent.id, user.username
+        FROM agent
+        INNER JOIN user ON agent.user_id = user.id
+        WHERE user.username LIKE ?
+      ');
+      
+      $stmt->execute(array($search_query));
+      $agent_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+      return json_encode($agent_array); 
+    }
+  
+    static function getAgentsByDepartment($db, $department, $search_query) {
+      $stmt = $db->prepare('
+        SELECT agent.id, user.username
+        FROM agent
+        INNER JOIN user ON agent.user_id = user.id
+        INNER JOIN agent_department ON agent.id = agent_department.agent_id
+        INNER JOIN department ON agent_department.department_id = department.id
+        WHERE user.username LIKE ?
+          AND department.name = ?;
+      ');
+      
+      $stmt->execute(array($search_query, $department));
+      $agent_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+      return json_encode($agent_array);
+    }
   }
 ?>
