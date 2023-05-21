@@ -29,6 +29,7 @@ function checkEmailExists() {
 function checkUsernameExists() {
   var username = document.getElementById("username").value;
   var username_status = document.getElementById("username_status");
+  var confirm_username_change = document.getElementById("confirm_username_change"); //Used only on profile username change
 
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
@@ -38,9 +39,11 @@ function checkUsernameExists() {
         if (response == "taken") {
           username_status.innerHTML = "Username already taken.";
           username_status.style.color = ERROR_COLOR;
+          confirm_username_change.style.display = "none";
         } else {
           username_status.innerHTML = "Username available.";
           username_status.style.color = SUCCESS_COLOR;
+          confirm_username_change.style.display = "inline";
         }
       } else {
         console.log("Error: " + xhr.status);

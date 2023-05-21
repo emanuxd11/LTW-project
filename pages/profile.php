@@ -7,6 +7,7 @@
     require_once(__DIR__ . '/../actions/change_profile_info.php');
     $changed_fname = $_POST['changed_first_name'];
     $changed_lname = $_POST['changed_last_name'];
+    $changed_username = $_POST['changed_username'];
 
     require_once(__DIR__ . '/../database/connection.db.php');
   
@@ -20,7 +21,8 @@
   
     $db = getDatabaseConnection();
 
-    ChangeName($db, $changed_fname, $changed_lname);  
+    ChangeName($db, $changed_fname, $changed_lname); 
+    ChangeUsername($db, $changed_username);
   
     drawHeader($session);
     drawProfileInfo($session, $db);
