@@ -1,13 +1,9 @@
-function changeProfileName(first_name, last_name) {
+function changeProfileName() {
     console.log("changeProfileName() called");
     document.getElementById('profile_name').innerHTML = 'New Name: ' + 
-                                                        /*'<form >' +   */ 
-                                                            '<span class="input" role="textbox" id="change_profile_fname" name="changed_first_name" contenteditable>' + first_name + '</span>' +
-                                                            '<span class="input" role="textbox" id="change_profile_lname" contenteditable>' + last_name + '</span>' +
-                                                            '<img class="confirm_button" id="confirm_name_button" src="/../images/check_button.png" alt="check_button.png" title="Confirm Name Change" type="submit">'/* +
-                                                        '</form>'*/;
-}
-
-function confirmProfileUsername() {
-
+                                                        '<form action="/../pages/profile.php" method="post">' + 
+                                                            '<input type="text" class="change_box" id="change_profile_fname" name="changed_first_name" placeholder="New First Name">' +
+                                                            '<input type="text" class="change_box" id="change_profile_lname" name="changed_last_name" placeholder="New Last Name">' +
+                                                            '<input type="submit" value="Confirm" id="confirm_name_change">' +
+                                                        '</form>';
 }

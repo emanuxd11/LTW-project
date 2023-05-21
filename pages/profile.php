@@ -4,6 +4,10 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
   
+    require_once(__DIR__ . '/../actions/change_profile_info.php');
+    $changed_fname = $_POST['changed_first_name'];
+    $changed_lname = $_POST['changed_last_name'];
+
     require_once(__DIR__ . '/../database/connection.db.php');
   
     require_once(__DIR__ . '/../templates/common.tpl.php');
@@ -15,6 +19,8 @@
     require_once(__DIR__ . '/../templates/ticket_show.tpl.php');
   
     $db = getDatabaseConnection();
+
+    ChangeName($db, $changed_fname, $changed_lname);  
   
     drawHeader($session);
     drawProfileInfo($session, $db);

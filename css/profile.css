@@ -48,37 +48,42 @@
     cursor: pointer;
 }
 
-.profile .profile-info h2 .input {
-    height: 18px;
+.profile .profile-info h2 form {
+    margin-top: 5px;
+}
+
+.profile .profile-info h2 form .change_box {
+    height: 28px;
 
     padding-left: 5px;
     padding-right: 5px;
 
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     border-radius: 5px;
 
-    margin: 5px;
+    margin: 3px;
+    margin-left: 0px;
+    margin-right: 0px;
 
     vertical-align: middle;
 }
 
-.profile .profile-info h2 .confirm_button {
-    background-color: #f2f2f2;
+.profile .profile-info h2 #confirm_name_change {
+    background-color: #4CAF50;
+    color: white;
     
-    height: 16px;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
     
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 5px;
-    
-    position: absolute;
+    margin-top: 0px;
 
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
+    font-size: 18px;
 
-.profile .profile-info .confirm_button:hover {
     cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    float: left;
 }
 
 .my-tickets {
