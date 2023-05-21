@@ -1,0 +1,17 @@
+#about-us {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    height: 90%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+}
+
+#contact h1 {
+    margin-bottom: 90px;
+}
+  

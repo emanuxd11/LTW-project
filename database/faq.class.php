@@ -17,6 +17,15 @@
                 INSERT INTO faq (title, answer) VALUES ( ?, ? )
             ');
             $stmt->execute(array($title, $answer));
+
+            $stmt = $db->prepare('
+                SELECT id FROM faq 
+                WHERE title = ?
+            ');
+            $stmt->execute(array($title));
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['id'];
         }
 
         static function getAllFaqIds(PDO $db) {

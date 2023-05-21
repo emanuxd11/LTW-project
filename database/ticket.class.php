@@ -108,6 +108,17 @@
             $stmt->execute(array($department, $client_id, $title, $description));
 
             // do something for the image and hashtags later
+
+            $stmt = $db->prepare('
+                SELECT id
+                FROM ticket
+                WHERE title=? and description=? and original_poster=?
+            ');
+            $stmt->execute(array($title, $description, $client_id));
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row['id'];
         }
 
         static function getAllTicketIds(PDO $db) {

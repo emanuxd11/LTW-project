@@ -10,7 +10,7 @@
 
   $db = getDatabaseConnection();
 
-  Faq::submitFaq($db, $_POST['title'], $_POST['answer']);
+  $id = Faq::submitFaq($db, $_POST['title'], $_POST['answer']);
 
-  header('Location: ../faq.php');
+  header('Location: ../pages/faq.php?id=' . $id);
 ?>

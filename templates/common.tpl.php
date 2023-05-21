@@ -16,7 +16,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ticket_form.css">
     <link rel="stylesheet" href="../css/faq_form.css">
+    <link rel="stylesheet" href="../css/faq.css">
+    <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="../css/ticket_page.css">
+    <link rel="stylesheet" href="../css/contact.css">
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" >
     
@@ -37,6 +40,16 @@
         }
       ?>
     </header>
+
+    <section id="top-bar">
+      <ul id="menu-items">
+        <li> <a href="../pages/index.php">Home</a> </li>
+        <li> <a href="../pages/faq_list.php">FAQ</a> </li>
+        <li> <a href="../pages/contacts.php">Contact Us</a> </li>
+        <li> <a href="../pages/profile.php?id=<?php echo $session->getId(); ?>">Account</a> </li>
+        <li> <a href="../pages/about_us.php">About Us</a> </li>
+      </ul>
+    </section>
 
     <main>
 <?php } ?>

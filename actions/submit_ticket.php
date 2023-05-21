@@ -10,7 +10,7 @@
 
   $db = getDatabaseConnection();
 
-  Ticket::submitTicket($db, $_POST['department'], $_POST['title'], $_POST['description'], $session->getId());
+  $id = Ticket::submitTicket($db, $_POST['department'], $_POST['title'], $_POST['description'], $session->getId());
 
-  header('Location: ../index.php');
+  header('Location: ../pages/ticket.php?id=' . $id);
 ?>
