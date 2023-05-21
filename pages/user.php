@@ -18,10 +18,15 @@
 
     $user_id = (int)$_GET['id'];
 
+    if ($user_id == $session->getId()) {
+        header('Location: profile.php');
+    }
+
     $user = User::getUser($db, $user_id);
   
     drawHeader($session);
     drawUserInfo($user, $db);
+    drawClientTypeManager($session, $user, $db);
     drawUserTickets($db, $user_id);
     drawFooter();
 ?>

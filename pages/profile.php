@@ -26,6 +26,7 @@
   
     drawHeader($session);
     drawProfileInfo($session, $db);
+    /*drawClientTypeManager($session, User::getUser($db, $session->getId()), $db);*/
     drawMyTickets($session, $db);
     drawFooter();
 ?>

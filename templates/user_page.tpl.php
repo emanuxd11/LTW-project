@@ -55,4 +55,36 @@
             echo '</div>';
         echo '</div>';
     }
+
+    function drawClientTypeManager($session, $user, $db) {
+        if (($session->isSessionAdmin($db) && !($user->isUserAdmin($db))) || ($session->isSessionAdmin($db) && ($session->getId() == $user->id))) {
+            echo '<div class="client-type-manager">';
+                echo '<h2>Client Type Manager (Access to Admins Only)</h2>';
+                echo '<div class="client-type-manager-info">';
+                    echo '<h3>Current Client Type: ';
+                        if ($user->isUserAdmin($db)) {
+                            echo 'Admin';
+                        }
+                        else if ($user->isUserAgent($db)) {
+                            echo 'Agent';
+                        }
+                        else {
+                            echo 'Client';
+                        }
+                    echo '</h3>';
+                    echo '<h3>Change Client Type:</h3>';
+                    echo '<form action="../actions/change_client_type.php" method="post">';
+                        echo '<input type="hidden" name="user_id" value="' . $user->id . '">';
+                        echo '<select name="client_type">';
+                            echo '<option value="client">Client</option>';
+                            echo '<option value="agent">Agent</option>';
+                            echo '<option value="admin">Admin</option>';
+                        echo '</select>';
+                        echo '<label>Warning: If you give Admin Privileges to an user, only they will be able to change them as Admins do not have control over other Admins</label>';
+                        echo '<input type="submit" value="Change">';
+                    echo '</form>';
+                echo '</div>';
+            echo '</div>';
+        }
+    }
 ?>

@@ -1,11 +1,12 @@
 .profile {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     padding: 20px;
 
     width: 50%;
 
     border: 1px solid #ccc;
+    border-radius: 5px;
     background-color: white;
 
     display: flex;
@@ -118,6 +119,7 @@
     padding: 20px;
     margin-left: 20px;
     margin-right: 20px;
+    margin-top: 10px;
 
     background-color: white;
     border: 1px solid #ccc;
