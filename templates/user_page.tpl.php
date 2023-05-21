@@ -26,6 +26,7 @@
                         echo 'Client';
                     }
                 echo '</h2>';
+                echo '<h2 id="password_change"><button class="button" id="change_password" onclick="changePassword()">Change Password</button></h2>';
             echo '</div>';
         echo '</div>';
     }

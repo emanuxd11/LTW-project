@@ -7,7 +7,11 @@
     require_once(__DIR__ . '/../actions/change_profile_info.php');
     $changed_fname = $_POST['changed_first_name'];
     $changed_lname = $_POST['changed_last_name'];
+    
     $changed_username = $_POST['changed_username'];
+
+    $new_password = $_POST['new_password'];
+    $new_password_confirm = $_POST['confirm_changed_password'];
 
     require_once(__DIR__ . '/../database/connection.db.php');
   
@@ -20,6 +24,10 @@
     require_once(__DIR__ . '/../templates/ticket_show.tpl.php');
   
     $db = getDatabaseConnection();
+
+    if ($new_password != "") {
+        User::changePassword($db, $new_password, $new_password_confirm, $session->getId());
+    }
 
     ChangeName($db, $changed_fname, $changed_lname); 
     ChangeUsername($db, $changed_username);

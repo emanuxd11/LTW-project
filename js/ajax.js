@@ -77,9 +77,11 @@ function checkPasswordGood() {
           return false;
         } else {
           strength_status.innerHTML = "";
+          return true;
         }
       } else {
         console.log("Error: " + xhr.status);
+        return false
       }
     }
   };
@@ -100,9 +102,11 @@ function checkPasswordsMatch() {
   if (password !== passsword_confirmation) {
     password_status.innerHTML = "Passwords do not match.";
     password_status.style.color = ERROR_COLOR;
+    return false
   } else {
     password_status.innerHTML = "Passwords match.";
     password_status.style.color = SUCCESS_COLOR;
+    return true;
   }
 }
 

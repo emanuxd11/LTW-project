@@ -152,6 +152,19 @@
       return true;
     }
 
+    static function changePassword(PDO $db, string $new_password, string $password_confirmation, int $user_id) {
+      // check if passwords match
+      if (User::passwordsMatch($new_password, $password_confirmation)) {
+        // update password
+        $stmt = $db->prepare('
+        UPDATE user SET password = ? WHERE id = ?
+        ');
+        $stmt->execute(array(password_hash($new_password, PASSWORD_DEFAULT), $user_id));
+
+        return true;
+      }
+    }
+
     static function getUserWithPassword(PDO $db, string $email, string $password) : ?User {
       $stmt = $db->prepare('
         SELECT id, first_name, last_name, username, email, creation_date, password

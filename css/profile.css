@@ -14,8 +14,8 @@
 
 .profile #default_profile_image {
     order: 0;
-    width: 30%;
-    height: 200px;
+    width: 40%;
+    height: 250px;
     background-color: #ccc;
 }
 

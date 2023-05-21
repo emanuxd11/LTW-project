@@ -17,3 +17,36 @@ function changeProfileUsername() {
                                                             '<input type="submit" value="Confirm" id="confirm_username_change">' +
                                                         '</form>';
 }
+
+function changePassword() {
+    document.getElementById('password_change').innerHTML = 'New Password: ' +
+                                                            '<form action="/../pages/profile.php" method="post">' + 
+                                                                '<input type="password" class="change_box" id="password" name="changed_password" placeholder="New Password" oninput="verifyPassword()">' +
+                                                                '<span id="strength_status"></span>' +
+                                                                '<input type="confirm_password" class="change_box" id="password_confirmation" name="confirm_changed_password" placeholder="Repeat Password" oninput="verifyPassword()">' +
+                                                                '<span id="password_status"></span>' +
+                                                                '<input type="submit" value="Confirm" id="confirm_password_change" style="display:none">' +
+                                                            '</form>';
+
+    document.getElementById('confirm_password_change').style.display = 'none';
+}
+
+function verifyPassword() {
+    var password_good = checkPasswordGood();
+    var passwords_match = checkPasswordsMatch();
+
+    if(document.getElementById('strength_status').innerHTML !== "") {
+        password_good = false;
+    }
+    else {password_good = true;}
+    console.log(password_good + " " + passwords_match);
+
+    if (password_good && passwords_match) {
+        document.getElementById('confirm_password_change').style.display = 'block';
+        console.log("display block");
+    }
+    else {
+        document.getElementById('confirm_password_change').style.display = 'none';
+    }
+    
+}
