@@ -24,6 +24,7 @@
     <script src="../js/chat.js" defer></script>
     <script src="../js/ajax.js" defer></script>
     <script src="../js/form_validation.js" defer></script>
+    <script src="../js/profile.js" defer></script>
   </head>
 
   <body>
