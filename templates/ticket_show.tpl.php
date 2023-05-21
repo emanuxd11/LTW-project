@@ -109,7 +109,7 @@
   
     <p>Status: <?php echo ($ticket->isClosed() ? "closed" : "open"); ?></p>
   
-    <?php if (!$ticket->isClosed() and $ticket->isAssigned() and $ticket->agent_id === $session->getId()): ?>
+    <?php if (!$ticket->isClosed() and $ticket->isAssigned() and $agent_user_id === $session->getId()): ?>
   
       <form id="mark-closed" action="../actions/close_ticket.php" method="post">
         <input type="hidden" name="ticket_id" value="<?php echo $ticket->id; ?>">
@@ -120,7 +120,7 @@
   </div>
 
   <?php 
-    if ($ticket->isAssigned() and $ticket->agent_id === $session->getId()) {
+    if ($ticket->isAssigned() and $agent_user_id === $session->getId()) {
       drawChat($ticket, $messages, $session);
     }
   ?>
@@ -164,7 +164,7 @@
             $searchText = $_GET["searchText"];
         }
         
-        $id_array = array_slice(array_reverse(Ticket::getTicketIdsFiltered($db, $department, $sortOrder, $searchText)), 0, 5);
+        $id_array = array_slice(array_reverse(Ticket::getTicketIdsFiltered($db, $department, $sortOrder, $searchText)), 0, 90);
         foreach($id_array as &$id) {
           $ticket = Ticket::getTicketById($db, $id);
           echo "<li>" . "\n";

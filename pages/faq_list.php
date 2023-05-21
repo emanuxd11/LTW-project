@@ -8,23 +8,19 @@
 
   require_once(__DIR__ . '/../templates/common.tpl.php');
   
-  require_once(__DIR__ . '/../templates/ticket_show.tpl.php');
+  require_once(__DIR__ . '/../templates/faq.tpl.php');
 
   $db = getDatabaseConnection();
 
   drawHeader($session);
   
-  DrawSearchOptions();
-  
-  drawTicketsPreview($session, $db);
-  
-  drawTicketFormLink($session);
+  drawFaqsPreview($session, $db);
 
   if ($session->isLoggedIn()) {
     if ($session->isSessionAdmin($db) or $session->isSessionAgent($db)) {
       drawFaqFormLink();    
     }
   }
-  
+
   drawFooter();
 ?>

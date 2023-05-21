@@ -203,12 +203,29 @@ footer {
   background-color: #34495e;
 }
 
+#faq-form-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 20px 12px 20px;
+  background-color: #2d3e50;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  width: 50%;
+}
+
+#faq-form-link:hover {
+  background-color: #34495e;
+}
+
 .recent-tickets {
   background-color: white;;
   border-radius: 4px;
   padding: 20px;
   width: 50%;
-  height: 80%;
+  height: 550px;
   overflow: auto;
 }
 
@@ -255,4 +272,32 @@ footer {
 .ticket-list li .ticket-date {
   color: #999;
   font-size: 12px;
+}
+
+#top-bar {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+#menu-items {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0px;
+}
+
+#menu-items li {
+  margin: 0 10px;
+}
+
+#menu-items li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+#menu-items li a:hover {
+  background-color: #555;
 }
