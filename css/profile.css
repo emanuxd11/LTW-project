@@ -30,10 +30,18 @@
 }
 
 .profile .profile-info .edit_button {
-    height: 100%;
+    background-color: #f2f2f2;
+    
+    height: calc(100% - 4px);
+    
     margin-left: 5px;
     margin-right: 5px;
+    padding: 1px;
+    
     position: absolute;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .profile .profile-info .edit_button:hover {
@@ -41,11 +49,19 @@
 }
 
 .profile .profile-info .confirm_button {
-    height: 100%;
+    background-color: #f2f2f2;
+    
+    height: 16px;
+    
     margin-left: 5px;
     margin-right: 5px;
+    padding: 5px;
+    
     position: absolute;
-    right: 100px;
+    right: 100px; /*Tirar depois*/
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .profile .profile-info .confirm_button:hover {
