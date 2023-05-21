@@ -183,5 +183,21 @@
     
             return $ticket_ids_array;
         }
+
+        static function getUserTickets(PDO $db, int $user_id) : array {
+            $stmt = $db->prepare('
+                SELECT id 
+                FROM ticket 
+                WHERE original_poster = ?
+            ');
+            $stmt->execute(array($user_id));
+    
+            $id_array = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $id_array[] = $row['id'];
+            }
+    
+            return $id_array;
+        }
     }
 ?>
