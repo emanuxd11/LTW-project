@@ -33,7 +33,7 @@
 
   <body>
     <header>
-      <h3><a href="/">No Name Tickets</a></h3>
+      <h3><a href="/../pages/index.php"><img id="header_logo" src="/../images/logo.png" alt="logo.png" title="NNTickets"></a></h3>
       <?php 
         if ($session->isLoggedIn()) {
           drawLogoutForm($session);
@@ -88,7 +88,7 @@
     </main>
 
     <footer>
-      No Name Tickets ltd. &copy; 2023
+      NNTickets ltd. &copy; 2023
     </footer>
   </body>
 </html>
